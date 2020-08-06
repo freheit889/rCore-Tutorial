@@ -14,7 +14,7 @@ pub fn init() {
         //TICKS = 0;
         sie::set_stimer();
         //sie::set_ssoft();
-        sstatus::set_sie();
+        //sstatus::set_sie();
     }
     println!("++++ setup timer       ++++")
 }

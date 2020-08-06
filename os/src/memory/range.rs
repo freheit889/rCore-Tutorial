@@ -19,7 +19,7 @@ impl<T: From<usize> + Into<usize> + Copy, U: Into<T>> From<core::ops::Range<U>> 
 impl<T: From<usize> + Into<usize> + Copy> Range<T> {
     pub fn overlap_with(&self, other: &Range<T>) -> bool {
         // T into usize
-        self.start.into() < other.start.into() && self.end.into() > other.start.into()
+        self.start.into() <= other.start.into() && self.end.into() >= other.start.into()
     }
     pub fn iter(&self) -> impl Iterator<Item = T> {
         // T into usize, usize Iterator

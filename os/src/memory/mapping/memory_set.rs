@@ -57,11 +57,10 @@ impl MemorySet {
             // 剩余内存空间，rw-
             Segment {
                 map_type: MapType::Linear,
-                range: Range::from(*KERNEL_END_ADDRESS..VirtualAddress::from(MEMORY_END_ADDRESS)),
+                range: Range::from(*KERNEL_END_ADDRESS..VirtualAddress::from(0x80060000)),
                 flags: Flags::READABLE | Flags::WRITABLE,
             },
         ];
-        println!("kenel end address:{:#x}, memory_end_address:{:#x}",usize::from(*KERNEL_END_ADDRESS),usize::from(VirtualAddress::from(MEMORY_END_ADDRESS)));
         let mut mapping = Mapping::new()?;
         // 每个字段在页表中进行映射
         for segment in segments.iter() {
