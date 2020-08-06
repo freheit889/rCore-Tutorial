@@ -2,10 +2,17 @@ pub mod heap;
 pub mod config;
 pub mod address;
 pub mod frame;
+pub mod mapping;
 mod range;
 
 pub type MemoryResult<T> = Result<T, &'static str>;
-
+pub use {
+    address::*,
+    config::*,
+    frame::FRAME_ALLOCATOR,
+    mapping::{Flags, MapType, MemorySet, Segment},
+    range::Range,
+};
 pub fn init() {
     clear_bss();
     heap::init();

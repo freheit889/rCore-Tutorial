@@ -45,7 +45,7 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
         //println!("have a rest...");
     }
      */
-
+    /*
     for _ in 0..2 {
         let frame_0 = match memory::frame::allocator::FRAME_ALLOCATOR.lock().alloc() {
             Result::Ok(frame_tracker) => frame_tracker,
@@ -56,10 +56,16 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
             Result::Err(err) => panic!("{}", err)
         };
         println!("{} and {}", frame_0.address(), frame_1.address());
-    }
+    }*/
 
-    interrupt::timer::init();
+   // interrupt::timer::init();
+    let remap=memory::mapping::MemorySet::new_kernel().unwrap();
+    remap.activate();
+    println!("kernel remapped");
 
-    loop {}
+    
+
+    panic!()
+    //loop{}
 }
 
