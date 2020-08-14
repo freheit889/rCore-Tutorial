@@ -1,0 +1,1000 @@
+ 3238  cd ..
+ 3239  cd ../..
+ 3240  cd ..
+ 3241  clear
+ 3242  ls
+ 3243  vim Makefile 
+ 3244  vim build.sh 
+ 3245  clear
+ 3246  ls
+ 3247  vim Makefile 
+ 3248  clear
+ 3249  cd ..
+ 3250  clear
+ 3251  cd ..
+ 3252  clear
+ 3253  ls
+ 3254  cd rCore-Tutorial/
+ 3255  clera
+ 3256  ls
+ 3257  clear
+ 3258  ls
+ 3259  vim deploy.sh 
+ 3260  clear
+ 3261  cd ../k210/rCore-Tutorial/
+ 3262  clear
+ 3263  ls
+ 3264  cd ..
+ 3265  clear
+ 3266  ls
+ 3267  cd opensbi/
+ 3268  clear
+ 3269  ls
+ 3270  vim Makefile 
+ 3271  clear
+ 3272  ls
+ 3273  vim Makefile 
+ 3274  clear
+ 3275  ls
+ 3276  cd ..
+ 3277  clear
+ 3278  ls
+ 3279  cd k210/rCore-Tutorial/
+ 3280  clear
+ 3281  ls
+ 3282  cd os/
+ 3283  clear
+ 3284  ls
+ 3285  ll
+ 3286  vim .cargo/config 
+ 3287  vim Makefile 
+ 3288  clear
+ 3289  cd ../tools/
+ 3290  clear
+ 3291  cd opensbi/
+ 3292  clear
+ 3293  ls
+ 3294  vim build.sh 
+ 3295  clear
+ 3296  ls
+ 3297  clear
+ 3298  ls
+ 3299  cd build
+ 3300  clear
+ 3301  ls
+ 3302  cd platform/
+ 3303  c;ear
+ 3304  clear
+ 3305  ls
+ 3306  cd kendryte/
+ 3307  ls
+ 3308  cd k210/
+ 3309  clear
+ 3310  ls
+ 3311  clear
+ 3312  ls
+ 3313  cd ../../..
+ 3314  clear
+ 3315  ls
+ 3316  cd ..
+ 3317  clear
+ 3318  ls
+ 3319  cd platform/kendryte/k210/
+ 3320  clear
+ 3321  ls
+ 3322  vim config.mk 
+ 3323  clear
+ 3324  cd ..
+ 3325  clear
+ 3326  ls
+ 3327  make clean
+ 3328  ./build.sh 
+ 3329  vim config.mk 
+ 3330  clear
+ 3331  vim platform/kendryte/k210/config.mk 
+ 3332  clear
+ 3333  ./build.sh 
+ 3334  clear
+ 3335  ls
+ 3336  clear
+ 3337  ls
+ 3338  clear
+ 3339  ls
+ 3340  cd ..
+ 3341  clear
+ 3342  ls
+ 3343  cd ..
+ 3344  clear
+ 3345  ls
+ 3346  cd os/
+ 3347  clear
+ 3348  vim src/main.rs 
+ 3349  clear
+ 3350  make run-k210
+ 3351  vim src/main.rs 
+ 3352  clear
+ 3353  make run-k210
+ 3354  clear
+ 3355  ls
+ 3356  clear
+ 3357  make run-k210
+ 3358  lear
+ 3359  clear
+ 3360  make run-k210
+ 3361  clear
+ 3362  ls
+ 3363  make run-k210
+ 3364  clear
+ 3365  vim src/main.rs 
+ 3366  clear
+ 3367  make run-k210
+ 3368  clear
+ 3369  ls
+ 3370  clear
+ 3371  make run-k210
+ 3372  clear
+ 3373  make run-k210
+ 3374  clear
+ 3375  make run-k210
+ 3376  clear
+ 3377  vim src/main.rs 
+ 3378  clear
+ 3379  make run-k210
+ 3380  clear
+ 3381  make run-k210
+ 3382  clear
+ 3383  make run-k210
+ 3384  clear
+ 3385  ls
+ 3386  vim src/main.rs 
+ 3387  clear
+ 3388  make run-k210
+ 3389  clear
+ 3390  make run-k210
+ 3391  clera
+ 3392  clear
+ 3393  make run-k210
+ 3394  clear
+ 3395  ls
+ 3396  vim src/main.rs 
+ 3397  vim src/drivers/device_tree.rs 
+ 3398  clear
+ 3399  make run-k210
+ 3400  vim src/drivers/device_tree.rs 
+ 3401  clear
+ 3402  make run-k210
+ 3403  clear
+ 3404  vim src/drivers/device_tree.rs 
+ 3405  clear
+ 3406  ls
+ 3407  clear
+ 3408  cd ../tools/opensbi/
+ 3409  clear
+ 3410  ls
+ 3411  cd ../..
+ 3412  clear
+ 3413  ls
+ 3414  cd os/
+ 3415  clear
+ 3416  make run-k210
+ 3417  clear
+ 3418  ls
+ 3419  clear
+ 3420  ls
+ 3421  vim src/main.rs 
+ 3422  clear
+ 3423  vim build.rs
+ 3424  clear
+ 3425  ls
+ 3426  vim src/main.rs 
+ 3427  clear
+ 3428  vim Makefile 
+ 3429  clear
+ 3430  vim Makefile 
+ 3431  clear
+ 3432* 
+ 3433  vim Makefile 
+ 3434  clear
+ 3435  make run-k210
+ 3436  vim src/main.rs 
+ 3437  clear
+ 3438  make run-k210
+ 3439  clear
+ 3440  vim src/main.rs 
+ 3441  clear
+ 3442  ls
+ 3443  cd src/
+ 3444  clear
+ 3445  ls
+ 3446  clear
+ 3447  ls
+ 3448  clear
+ 3449  ls
+ 3450  clear
+ 3451  cd ..
+ 3452  clear
+ 3453  ls
+ 3454  cd ../user/
+ 3455  clear
+ 3456  ls
+ 3457  cd target/riscv64imac-unknown-none-elf/debug/
+ 3458  clear
+ 3459  ls
+ 3460  ll
+ 3461  ll -a
+ 3462  vim hello_world
+ 3463  clear
+ 3464  cd ../../../..
+ 3465  clear
+ 3466  ls
+ 3467  cd os/
+ 3468  clear
+ 3469  ls
+ 3470  cd ../user/
+ 3471  ls
+ 3472  cd ..
+ 3473  ckear
+ 3474  clear
+ 3475  ls
+ 3476  cd os/
+ 3477  clear
+ 3478  ;s
+ 3479  kls
+ 3480  clear
+ 3481  ls
+ 3482  cd src/
+ 3483  clear
+ 3484  ls
+ 3485  cd ..
+ 3486  clear
+ 3487  ls
+ 3488  cd src/
+ 3489  clear
+ 3490  ls
+ 3491  mkdir fs
+ 3492  clear
+ 3493  ls
+ 3494  clear
+ 3495  ls
+ 3496  vim process/process.rs 
+ 3497  clear
+ 3498  cd ~/rCore-Tutorial/
+ 3499  clear
+ 3500  git checkout master
+ 3501  clear
+ 3502  ls
+ 3503  cd os/
+ 3504  cd src/
+ 3505  celar
+ 3506  clear
+ 3507  ls
+ 3508  cp -rf fs/ ~/k210/rCore-Tutorial/os/src/
+ 3509  c;ear
+ 3510  lcear
+ 3511  clear
+ 3512  cd ~/k210/rCore-Tutorial/os/src/c
+ 3513  cd ~/k210/rCore-Tutorial/os/src/
+ 3514  clera
+ 3515  clear
+ 3516  ls
+ 3517  cd fs/
+ 3518  clear
+ 3519  ls
+ 3520  cargo run
+ 3521  cargo build
+ 3522  clear
+ 3523  cd ../..
+ 3524  clear
+ 3525  make run-k210
+ 3526  clear
+ 3527  cd src/
+ 3528  clear
+ 3529  vim main.rs 
+ 3530  clear
+ 3531  cargo run
+ 3532  clear
+ 3533  ls
+ 3534  cd ..
+ 3535  clear
+ 3536  ls
+ 3537  cd ..
+ 3538  clear
+ 3539  cd user/
+ 3540  clear
+ 3541  cd ..
+ 3542  clear
+ 3543  cd os/
+ 3544  celar
+ 3545  clear
+ 3546  ls
+ 3547  vim Makefile 
+ 3548  clear
+ 3549  mv src/fs/ .
+ 3550  clear
+ 3551  ls
+ 3552  cargo run
+ 3553  mv fs/  ..
+ 3554  clear
+ 3555  ls
+ 3556  cargo run
+ 3557  clear
+ 3558  ls
+ 3559  make run-k210
+ 3560  clear
+ 3561  mv ../fs/ src/
+ 3562  clear
+ 3563  ls
+ 3564  mv ../fs/ src/
+ 3565  c;lear
+ 3566  clear
+ 3567  make run-k210
+ 3568  cargo clean
+ 3569  cargo run
+ 3570  clear
+ 3571  ls
+ 3572  clear
+ 3573  ls
+ 3574  make run-k210
+ 3575  clear
+ 3576  vim Cargo.toml 
+ 3577  clear
+ 3578  make run-k210
+ 3579  lear
+ 3580  clear
+ 3581  vim src/process/process.rs 
+ 3582  clear
+ 3583  make run-k210
+ 3584  clear
+ 3585  cp -rf ~/rCore-Tutorial/os/src/kernel/ src/
+ 3586  clear
+ 3587  ls
+ 3588  cd src/
+ 3589  clear
+ 3590  ls
+ 3591  vim main.rs 
+ 3592  clear
+ 3593  make run-k210
+ 3594  cd ..
+ 3595  clear
+ 3596  make run-k210
+ 3597  vim src/fs/mod.rs 
+ 3598  clear
+ 3599  ls
+ 3600  make run-k210
+ 3601  vim src/fs/mod.rs 
+ 3602  clear
+ 3603  make run-k210
+ 3604  vim src/fs/mod.rs 
+ 3605  clear
+ 3606  vim Cargo.toml 
+ 3607  clear
+ 3608  ls
+ 3609  cargo run
+ 3610  clear
+ 3611  ls
+ 3612  cd src/
+ 3613  c;lear
+ 3614  clear
+ 3615  ls
+ 3616  vim link_user.S 
+ 3617  clear
+ 3618  ls
+ 3619  cd ..
+ 3620  clear
+ 3621  ls
+ 3622  vim Makefile 
+ 3623  clear
+ 3624  ls
+ 3625  vim build.rs 
+ 3626  clear
+ 3627  cargo run
+ 3628  make run
+ 3629  clear
+ 3630  ls
+ 3631  cd src/
+ 3632  clear
+ 3633  ls
+ 3634  vim link_user.S 
+ 3635  clear
+ 3636  rm -rf fs/
+ 3637  clear
+ 3638  ls
+ 3639  cargo run
+ 3640  cd ..
+ 3641  clear
+ 3642  ls
+ 3643  vim build.rs 
+ 3644  clear
+ 3645  cargo run
+ 3646  clear
+ 3647  cd src/
+ 3648  clear
+ 3649  ls
+ 3650  clear
+ 3651  cd ../..
+ 3652  clear
+ 3653  cd ../..
+ 3654  clear
+ 3655  ls
+ 3656  git clone https://github.com/kendryte/kendryte-standalone-demo
+ 3657  clear
+ 3658  ls
+ 3659  cd kendryte-standalone-demo/
+ 3660  ls
+ 3661  clear
+ 3662  ls
+ 3663  cd ..
+ 3664  clear
+ 3665  git clone https://github.com/kendryte/kendryte-standalone-sdk
+ 3666  clear
+ 3667  ls
+ 3668  clear
+ 3669  ls
+ 3670  cd kendryte-standalone-
+ 3671  cd kendryte-standalone-sdk/
+ 3672  clear
+ 3673  ls
+ 3674  cmake .. -DPROJ=<ProjectName> -DTOOLCHAIN=/opt/riscv-toolchain/bin && make
+ 3675  mkdir build && cd build
+ 3676  cmake .. -DPROJ=<ProjectName> -DTOOLCHAIN=/opt/riscv-toolchain/bin && make
+ 3677  cd ..
+ 3678  clear
+ 3679  ls
+ 3680  rm -rf build/
+ 3681  c;ear
+ 3682  clear
+ 3683  cd src/
+ 3684  clear
+ 3685  ls
+ 3686  cmake .. -DPROJ=<ProjectName> -DTOOLCHAIN=/opt/riscv-toolchain/bin && make
+ 3687  mkdir build && cd build
+ 3688  cmake .. -DPROJ=<ProjectName> -DTOOLCHAIN=/opt/riscv-toolchain/bin && make
+ 3689  cmake .. -DPROJ=<Hello_world> -DTOOLCHAIN=/opt/riscv-toolchain/bin && make
+ 3690  cmake .. -DPROJ=<hello_world> -DTOOLCHAIN=/opt/riscv-toolchain/bin && make
+ 3691  cmake .. -DPROJ=<Hello_world> -DTOOLCHAIN=/opt/riscv-toolchain/bin && makeclear
+ 3692  clear
+ 3693  cmake .. -DPROJ=<hello_world> -DTOOLCHAIN=/opt/riscv-toolchain/bin && makeclear
+ 3694  cmake .. -DPROJ=<../hello_world> -DTOOLCHAIN=/opt/riscv-toolchain/bin && makeclear
+ 3695  clear
+ 3696  cmake .. -DPROJ=<../hello_world> -DTOOLCHAIN=/opt/riscv-toolchain/bin && makeclear
+ 3697  cd ..
+ 3698  clear
+ 3699  ls
+ 3700  cd ..
+ 3701  clear
+ 3702  ls
+ 3703  clear
+ 3704  data -R
+ 3705  date -T
+ 3706  date -R
+ 3707  tzselect
+ 3708  clear
+ 3709  date -R
+ 3710  tzselect
+ 3711  TZ='Asia/Bangkok'
+ 3712  clear
+ 3713  date -R
+ 3714  clear
+ 3715  ls
+ 3716  clear
+ 3717  ls
+ 3718  clear
+ 3719  cmake .. -DPROJ=<../hello_world> -DTOOLCHAIN=/opt/riscv-toolchain/bin && make
+ 3720  cd s
+ 3721  ls
+ 3722  cd src/build/
+ 3723  clear
+ 3724  cmake .. -DPROJ=<../hello_world> -DTOOLCHAIN=/opt/riscv-toolchain/bin && make
+ 3725  riscv-toolchain
+ 3726  riscv-toolchain -h
+ 3727  cd ~
+ 3728  clear
+ 3729  git clone https://github.com/riscv/riscv-gnu-toolchain
+ 3730  clear
+ 3731  cd riscv-gnu-toolchain/
+ 3732  clear
+ 3733  git submodule update --init --recursive
+ 3734  clear
+ 3735  ls
+ 3736  cd ..
+ 3737  clear
+ 3738  ls
+ 3739  rm -rf riscv-gnu-toolchain/
+ 3740  clear
+ 3741  ls
+ 3742  wget https://github.com/riscv/riscv-gnu-toolchain/archive/v20171231.tar.gz
+ 3743  clear
+ 3744  ls
+ 3745  tar -zxvf v20171231.tar.gz 
+ 3746  clear
+ 3747  ls
+ 3748  rm -rf v20171231.tar.gz 
+ 3749  clear
+ 3750  ls
+ 3751  cd riscv-gnu-toolchain-20171231/
+ 3752  ls
+ 3753  ll
+ 3754  clear
+ 3755  ls
+ 3756  sudo apt-get install autoconf automake autotools-dev curl python3 libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev libexpat-dev
+ 3757  clear
+ 3758  ls
+ 3759  ./configure --prefix=/opt/riscv
+ 3760  make linux
+ 3761  clear
+ 3762  ls
+ 3763  cd riscv-
+ 3764  cd riscv-binutils-gdb/
+ 3765  ls
+ 3766  cd ..
+ 3767  clear
+ 3768  ls
+ 3769  ./configure --prefix=/opt/riscv
+ 3770  clear
+ 3771  ls
+ 3772  vim config.status 
+ 3773  clear
+ 3774  ./configure --prefix=/opt/riscv
+ 3775  make
+ 3776  make linux
+ 3777  clear
+ 3778  ls
+ 3779  git submodule update --init --recursive
+ 3780  clear
+ 3781  make linux
+ 3782  clear
+ 3783  cd ..
+ 3784  clear
+ 3785  ls
+ 3786  rm -rf riscv-gnu-toolchain-20171231/
+ 3787  clear
+ 3788  git clone https://github.com/riscv/riscv-gnu-toolchain
+ 3789  clear
+ 3790  cd riscv-gnu-toolchain
+ 3791  git submodule update --init --recursive
+ 3792  clear
+ 3793  git submodule update --init --recursive
+ 3794  c;ear
+ 3795  clear
+ 3796  git submodule update --init --recursive
+ 3797  clear
+ 3798  git submodule update --init --recursive
+ 3799  clear
+ 3800  ls
+ 3801  cd ..
+ 3802  clear
+ 3803  ls
+ 3804  rm -rf riscv-gnu-toolchain/
+ 3805  git clone --recursive https://github.com/riscv/riscv-gnu-toolchain
+ 3806  clear
+ 3807  ls
+ 3808  rm -rf riscv-gnu-toolchain/
+ 3809  clear
+ 3810  git clone https://github.com/riscv/riscv-gnu-toolchain
+ 3811  clear
+ 3812  ls
+ 3813  cd riscv-gnu-toolchain/
+ 3814  clera
+ 3815  clear
+ 3816  ls
+ 3817  git clone https://github.com/riscv/riscv-qemu
+ 3818  clear
+ 3819  ls
+ 3820  rm -r qemu/
+ 3821  mv riscv-qemu/ qemu
+ 3822  clear
+ 3823  ls
+ 3824  ll
+ 3825  clear
+ 3826  ls
+ 3827  rm -f riscv-gcc/
+ 3828  clear
+ 3829  rm -r riscv-gcc/
+ 3830  git clone https://github.com/riscv/riscv-gcc
+ 3831  clear
+ 3832  cd ..
+ 3833  clera
+ 3834  clear
+ 3835  tar -zxJf kendryte-toolchain-ubuntu-amd64-8.2.0-20190409.tar.xz 
+ 3836  tar -vxJf kendryte-toolchain-ubuntu-amd64-8.2.0-20190409.tar.xz 
+ 3837  clear
+ 3838  ls
+ 3839  rm -rf kendryte-toolchain-ubuntu-amd64-8.2.0-20190409.tar.xz 
+ 3840  clear
+ 3841  ls
+ 3842  cd kendryte-toolchain/
+ 3843  clear
+ 3844  ls
+ 3845  /configure --prefix=/opt/kendryte-toolchain --with-cmodel=medany --with-arch=rv64imafc --with-abi=lp64f
+ 3846  ./configure --prefix=/opt/kendryte-toolchain --with-cmodel=medany --with-arch=rv64imafc --with-abi=lp64f
+ 3847  clear
+ 3848  ls
+ 3849  cd include/
+ 3850  ls
+ 3851  cd ..
+ 3852  clear
+ 3853  ls
+ 3854  cd riscv64-unknown-elf/
+ 3855  ls
+ 3856  cd ..
+ 3857  clear
+ 3858  ls
+ 3859  clear
+ 3860  ls
+ 3861  cd share/
+ 3862  ls
+ 3863  cd ..
+ 3864  clear
+ 3865  cd ..
+ 3866  clear
+ 3867  cd kendryte-standalone-
+ 3868  cd kendryte-standalone-sdk/
+ 3869  clear
+ 3870  ls
+ 3871  cd s
+ 3872  cd src/
+ 3873  clear
+ 3874  ls
+ 3875  cd build/
+ 3876  cmake .. -DPROJ=<../hello_world> -DTOOLCHAIN=/root/kendryte-toolchain/bin && make
+ 3877  cmake .. -DPROJ=<../hello_world> -DTOOLCHAIN=/root/kendryte-toolchain/bin/ && make
+ 3878  clear
+ 3879  cmake .. -DPROJ=<../hello_world> -DTOOLCHAIN=/root/kendryte-toolchain/bin/ && make
+ 3880  cmake .. -DPROJ=<../hello_world> -DTOOLCHAIN=/root/kendryte-toolchain/bin && make
+ 3881  cd ..
+ 3882  clear
+ 3883  cmake .. -DPROJ=<../hello_world> -DTOOLCHAIN=/root/kendryte-toolchain/bin && make
+ 3884  cmake .. -DPROJ=<hello_world> -DTOOLCHAIN=/root/kendryte-toolchain/bin && make
+ 3885  cd /root/kendryte-toolchain/bin/
+ 3886  ls
+ 3887  clear
+ 3888  cmake .. -DPROJ=<hello_world> -DTOOLCHAIN=/root/kendryte-toolchain/bin && make
+ 3889  ls
+ 3890  make
+ 3891  cd ..
+ 3892  clear
+ 3893  cd ..
+ 3894  clear
+ 3895  ls
+ 3896  cd kendryte-standalone-sdk/
+ 3897  clear
+ 3898  ls
+ 3899  cd s
+ 3900  cd src/
+ 3901  clear
+ 3902  ls
+ 3903  cd build/
+ 3904  cmake .. -DPROJ=<../hello_world> -DTOOLCHAIN=/root/kendryte-toolchain/bin && make
+ 3905  cmake .. -DPROJ=<../hello_world> -DTOOLCHAIN=/root/kendryte-toolchain && make
+ 3906  cmake .. -DPROJ=<../hello_world> -DTOOLCHAIN=/root && make
+ 3907  cmake .. -DPROJ=<../hello_world> -DTOOLCHAIN=/root/kendryte-toolchain/bin && make
+ 3908  claer
+ 3909  cd ~
+ 3910  clear
+ 3911  ls
+ 3912  clear
+ 3913  cd kendryte-standalone-sdk/
+ 3914  clear
+ 3915  l;s
+ 3916  cd s
+ 3917  cd src/
+ 3918  clear
+ 3919  ls
+ 3920  cd hello_world/
+ 3921  ls
+ 3922  cd ..
+ 3923  clear
+ 3924  l;s
+ 3925  ls
+ 3926  clera
+ 3927  clear
+ 3928  ls
+ 3929  cd build/
+ 3930  clear
+ 3931  ls
+ 3932  cmake .. -DPROJ=<../hello_world/> -DTOOLCHAIN=/root/kendryte-toolchain/bin && make
+ 3933  cmake .. -DPROJ=<../hello_world/main.c> -DTOOLCHAIN=/root/kendryte-toolchain/bin && make
+ 3934  clear
+ 3935  cd ..
+ 3936  clear
+ 3937  cd ..
+ 3938  clear
+ 3939  ls
+ 3940  cd ..
+ 3941  clear
+ 3942  ls
+ 3943  mv kendryte-toolchain/ /opt/riscv-toolchain
+ 3944  clear
+ 3945  ls
+ 3946  cd kendryte-standalone-sdk/
+ 3947  clear
+ 3948  ls
+ 3949  cd src/
+ 3950  clear
+ 3951  cmake .. -DPROJ=<ProjectName> -DTOOLCHAIN=/opt/riscv-toolchain/bin && make
+ 3952  cmake .. -DPROJ=<hello_world/> -DTOOLCHAIN=/opt/riscv-toolchain/bin && make
+ 3953  clear
+ 3954  cmake .. -DPROJ=<hello_world/> -DTOOLCHAIN=/opt/riscv-toolchain/bin/ && make
+ 3955  cmake .. -DPROJ=<hello_world/> -DTOOLCHAIN=/opt/riscv-toolchain/bin && make
+ 3956  clear
+ 3957  cmake .. -DPROJ=<hello_world/> -DTOOLCHAIN=/opt/riscv-toolchain/bin && make
+ 3958  cd build/
+ 3959  clear
+ 3960  cmake .. -DPROJ=<../hello_world/> -DTOOLCHAIN=/opt/riscv-toolchain/bin && make
+ 3961  cmake .. -DPROJ=hello_world -DTOOLCHAIN=/opt/riscv-toolchain/bin && make
+ 3962  apt install cmake
+ 3963  clear
+ 3964  cmake .. -DPROJ=hello_world -DTOOLCHAIN=/opt/riscv-toolchain/bin && make
+ 3965  cd ..
+ 3966  rm -r build/
+ 3967  clear
+ 3968  cd ..
+ 3969  cmake .. -DPROJ=src/hello_world -DTOOLCHAIN=/opt/riscv-toolchain/bin && make
+ 3970  mkdir build && cd build
+ 3971  cmake .. -DPROJ=hello_world -DTOOLCHAIN=/opt/riscv-toolchain/bin && make
+ 3972  clear
+ 3973  cd ..
+ 3974  cd build/
+ 3975  ls
+ 3976  clear
+ 3977  cp ~/k210/rCore-Tutorial/os/built .
+ 3978  cp -r ~/k210/rCore-Tutorial/os/built .
+ 3979  clear
+ 3980  ls
+ 3981  vim Makefile 
+ 3982  clear
+ 3983  make run-k210
+ 3984  vim Makefile 
+ 3985  make run-k210
+ 3986  vim Makefile 
+ 3987  clear
+ 3988  make run-k210
+ 3989  vim Makefile 
+ 3990  clear
+ 3991  make run-k210
+ 3992  clear
+ 3993  ls
+ 3994  cd ..
+ 3995  clear
+ 3996  ls
+ 3997  cd src/
+ 3998  clear
+ 3999  ls
+ 4000  rm -rf hello_world/
+ 4001  cp -r ~/kendryte-standalone-demo/flash_w25qxx .
+ 4002  clear
+ 4003  ls
+ 4004  cd ..
+ 4005  clear
+ 4006  ls
+ 4007  cmake .. -DPROJ=<ProjectName> -DTOOLCHAIN=/opt/riscv-toolchain/bin && make
+ 4008  cd build/
+ 4009  cmake .. -DPROJ=flash_w25qxx -DTOOLCHAIN=/opt/riscv-toolchain/bin && make
+ 4010  vim Makefile 
+ 4011  clear
+ 4012  cd ..
+ 4013  vim Makefile
+ 4014  clear
+ 4015  make run-k210
+ 4016  vim Makefile
+ 4017  clear
+ 4018  make run-k210
+ 4019  clear
+ 4020  vim Makefile 
+ 4021  cler
+ 4022  clear
+ 4023  make run-k210
+ 4024  vim Makefile 
+ 4025  clear
+ 4026  make run-k210
+ 4027  clear
+ 4028  ls
+ 4029  cd src/
+ 4030  clear
+ 4031  ls
+ 4032  cp -r ~/kendryte-standalone-demo/flash_w25qxx_dma_test 
+ 4033  cp -r ~/kendryte-standalone-demo/flash_w25qxx_dma_test  .
+ 4034  clear
+ 4035  ls
+ 4036  rm rf flash_w25qxx
+ 4037  rm -r flash_w25qxx
+ 4038  clear
+ 4039  ls
+ 4040  cd ..
+ 4041  vim Makefile 
+ 4042  clear
+ 4043  make run-k210
+ 4044  vim Makefile 
+ 4045  clear
+ 4046  cd src/
+ 4047  clear
+ 4048  ls
+ 4049  rm -rf flash_w25qxx_dma_test/
+ 4050  clear
+ 4051  cp -r ~/kendryte-standalone-demo/flash_w25qxx_test/
+ 4052  cp -r ~/kendryte-standalone-demo/flash_w25qxx_test/ .
+ 4053  clear
+ 4054  cd ..
+ 4055  make run-k210
+ 4056  clear
+ 4057  cd build/
+ 4058  clear
+ 4059  ls
+ 4060  cd ..
+ 4061  cd src/c
+ 4062  cd src/
+ 4063  clear
+ 4064  l;s
+ 4065  ls
+ 4066  clear
+ 4067  ls
+ 4068  rm -rf flash_w25qxx_test/
+ 4069  cler
+ 4070  clear
+ 4071  cp -r ~/kendryte-standalone-demo/flash_w25qxx .
+ 4072  ls
+ 4073  cd ..
+ 4074  clear
+ 4075  ls
+ 4076  vim Makefile 
+ 4077  clear
+ 4078  make run-k210
+ 4079  clear
+ 4080  ls
+ 4081  clear
+ 4082  c;ear
+ 4083  clear
+ 4084  ls
+ 4085  clear
+ 4086  ls ..
+ 4087  clear
+ 4088  ls
+ 4089  cd ..
+ 4090  clear
+ 4091  ls
+ 4092  cd kendryte-standalone-demo/
+ 4093  clear
+ 4094  make run-k210
+ 4095  ls
+ 4096  cd ../kendryte-standalone-demo/
+ 4097  cd ../kendryte-standalone-sdk/
+ 4098  clear
+ 4099  make run-k210
+ 4100  clear
+ 4101  ls
+ 4102  clear
+ 4103  cd src/
+ 4104  clear
+ 4105  ls
+ 4106  cd flash_w25qxx/
+ 4107  ls
+ 4108  clear
+ 4109  vim main.c 
+ 4110  clear
+ 4111  cd ..
+ 4112  make run-k210
+ 4113  ls
+ 4114  cd ..
+ 4115  clear
+ 4116  make run-k210
+ 4117  clear
+ 4118  vim src/flash_w25qxx/main.c 
+ 4119  clear
+ 4120  make run-k210
+ 4121  vim src/flash_w25qxx/main.c 
+ 4122  clear
+ 4123  make run-k210
+ 4124  clear
+ 4125  vim src/flash_w25qxx/main.c 
+ 4126  clear
+ 4127  make run-k210
+ 4128  clear
+ 4129  vim src/flash_w25qxx/main.c 
+ 4130  clear
+ 4131  make run-k210
+ 4132  vim src/flash_w25qxx/main.c 
+ 4133  make run-k210
+ 4134  vim src/flash_w25qxx/main.c 
+ 4135  clear
+ 4136  make run-k210
+ 4137  vim src/flash_w25qxx/main.c 
+ 4138  clear
+ 4139  make run-k210
+ 4140  vim src/flash_w25qxx/main.c 
+ 4141  make run-k210
+ 4142  vim src/flash_w25qxx/main.c 
+ 4143  make run-k210
+ 4144  clear
+ 4145  make run-k210
+ 4146  clear
+ 4147  ls
+ 4148  clear
+ 4149  ls
+ 4150  cd lib/
+ 4151  ls
+ 4152  cd drivers/
+ 4153  ls
+ 4154  cd include/
+ 4155  ls
+ 4156  clear
+ 4157  cd ../../..
+ 4158  clear
+ 4159  ls
+ 4160  make run-k210
+ 4161  clear
+ 4162  ls
+ 4163  cd build/
+ 4164  ls
+ 4165  clear
+ 4166  ls
+ 4167  rm -rf hello_world.bin 
+ 4168  clear
+ 4169  ls
+ 4170  rm rf hello_world 
+ 4171  rm -rf hello_world 
+ 4172  rm -rf hello_world flash_w25qxx_dma_test*
+ 4173  ls
+ 4174  clear
+ 4175  ls
+ 4176  rm -rf hello_world flash_w25qxx_test*
+ 4177  ls
+ 4178  clear
+ 4179  ls
+ 4180  clear
+ 4181  ls
+ 4182  clear
+ 4183  ls
+ 4184  cd ..
+ 4185  clear
+ 4186  ls
+ 4187  cd lib/
+ 4188  ls
+ 4189  cd drivers/
+ 4190  clear
+ 4191  ls
+ 4192  cd include/
+ 4193  ls
+ 4194  cd ..
+ 4195  clear
+ 4196  ls
+ 4197  cd ,,
+ 4198  cd ..
+ 4199  clear
+ 4200  cd ..
+ 4201  clear
+ 4202  ls
+ 4203  cd src/
+ 4204  clear
+ 4205  ls
+ 4206  cd flash_w25qxx/
+ 4207  ls
+ 4208  vim main.c 
+ 4209  clear
+ 4210  ls
+ 4211  vim w25qxx.c 
+ 4212  clear
+ 4213  ls
+ 4214  cd ..
+ 4215  clear
+ 4216  ls
+ 4217  cd ..
+ 4218  clear
+ 4219  ls
+ 4220  cd lib/
+ 4221  clear
+ 4222  ls
+ 4223  cd drivers/
+ 4224  cd ../utils/
+ 4225  ls
+ 4226  cd include/
+ 4227  ls
+ 4228  cd ..
+ 4229  clear
+ 4230  ls
+ 4231  cd drivers/
+ 4232  clear
+ 4233  ls
+ 4234  clear
+ 4235  history 
+ 4236  history || more
+ 4237  history>>log.txt

@@ -54,4 +54,6 @@ u32 sysctl_get_cpu_freq(void)
 	default:
 		return 0;
 	}
+
 }
+
