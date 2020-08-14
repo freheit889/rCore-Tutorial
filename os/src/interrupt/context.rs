@@ -40,7 +40,6 @@ impl Context{
     ///
     /// 没有考虑一些特殊情况，例如超过 8 个参数，或 struct 空间展开
     pub fn set_arguments(&mut self, arguments: &[usize]) -> &mut Self {
-        println!("2point");
         assert!(arguments.len() <= 8);
         self.x[10..(10 + arguments.len())].copy_from_slice(arguments);
         self
@@ -54,7 +53,7 @@ impl Context{
         }
         context.sepc=entry_point;
         context.sstatus=sstatus::read();
-        
+        println!("{:?}",sstatus::read()); 
         if is_user{
             context.sstatus.set_spp(User);
         }else{

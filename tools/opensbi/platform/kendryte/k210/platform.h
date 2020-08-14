@@ -44,6 +44,15 @@
 #define IO_BASE_ADDR		(0x40000000U)
 #define IO_SIZE			(6 * 1024 * 1024U)
 
+#define AI_RAM_BASE_ADDR	(0x80600000U)
+#define AI_RAM_SIZE		(2 * 1024 * 1024U)
+
+#define AI_IO_BASE_ADDR		(0x40600000U)
+#define AI_IO_SIZE		(2 * 1024 * 1024U)
+
+#define AI_BASE_ADDR		(0x40800000U)
+#define AI_SIZE			(12 * 1024 * 1024U)
+
 #define FFT_BASE_ADDR		(0x42000000U)
 #define FFT_SIZE		(4 * 1024 * 1024U)
 

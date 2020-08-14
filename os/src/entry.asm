@@ -12,6 +12,7 @@ _start:
     jr t0
 
     .section .bss.stack
+    .align 12
     .globl boot_stack
 boot_stack:
     .space 4096 * 4 * 2

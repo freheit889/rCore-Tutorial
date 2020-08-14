@@ -3,7 +3,7 @@
 use lazy_static::*;
 use super::address::{PhysicalAddress,VirtualAddress};
 
-pub const KERNEL_HEAP_SIZE: usize = 0x25_0000;
+pub const KERNEL_HEAP_SIZE: usize = 0x28_0000;
 pub const PAGE_SIZE: usize = 4096;
 pub const PAGE_SIZE_BITS: usize = 12;
 pub const MEMORY_START_ADDRESS: PhysicalAddress = PhysicalAddress(0x8000_0000);

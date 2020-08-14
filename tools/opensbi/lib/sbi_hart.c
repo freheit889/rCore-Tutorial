@@ -257,7 +257,7 @@ sbi_hart_switch_mode(unsigned long arg0, unsigned long arg1,
 		csr_write(CSR_STVEC, next_addr);
 		csr_write(CSR_SSCRATCH, 0);
 		csr_write(CSR_SIE, 0);
-		csr_write(CSR_SATP, 0);
+		//csr_write(CSR_SATP, 0);
 	} else if (next_mode == PRV_U) {
 		csr_write(CSR_UTVEC, next_addr);
 		csr_write(CSR_USCRATCH, 0);
