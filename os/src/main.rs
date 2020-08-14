@@ -8,6 +8,7 @@
 #![feature(drain_filter)]
 
 global_asm!(include_str!("entry.asm"));
+global_asm!(include_str!("link_user.S"));
 
 extern crate alloc;
 
@@ -19,15 +20,19 @@ mod interrupt;
 mod memory;
 mod algorithm;
 mod process;
+mod fs;
+mod kernel;
 
 use process::*;
 use alloc::sync::Arc;
-
+use crate::fs::{ROOT_INODE,INodeExt};
+use xmas_elf::ElfFile;
 #[no_mangle]
 pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
-    println!("Hello world #{}! sp = 0x{:x}", hartid, sp);
+//    println!("Hello world #{}! sp = 0x{:x}", hartid, sp);
     interrupt::init();
     memory::init();
+    fs::init();
   //  unsafe {
     //    llvm_asm!("ebreak"::::"volatile");
     //}
@@ -36,11 +41,11 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
     }
     println!("kernel_end = {:#x}", kernel_end as usize);
     println!("_kernel_end = {:#x}", (kernel_end as usize) / 4096);
- 
+    /* 
     {
         let mut processor=PROCESSOR.lock();
         let kernel_process=Process::new_kernel().unwrap();
-        for i in 1..=9usize{
+        for i in 1..=1usize{
             let thread=create_kernel_thread(
                     kernel_process.clone(),
                     sample_process as usize,
@@ -48,7 +53,11 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
                     );
            processor.add_thread(thread);
         }
-    }
+    }*/
+
+    PROCESSOR.lock().add_thread(create_user_process("hello_world"));
+    
+
     extern "C" {
         fn __restore(context: usize);
     }
@@ -79,6 +88,21 @@ pub fn create_kernel_thread(
         .set_ra(kernel_thread_exit as usize);
     thread
 }
+pub fn create_user_process(name: &str) -> Arc<Thread> {
+    // 从文件系统中找到程序
+    let app = ROOT_INODE.find(name).unwrap();
+    // 读取数据
+    let data = app.readall().unwrap();
+    // 解析 ELF 文件
+    let elf = ElfFile::new(data.as_slice()).unwrap();
+    // 利用 ELF 文件创建线程，映射空间并加载数据
+    let process = Process::from_elf(&elf, true).unwrap();
+
+//    println!("{:?}",process.inner().memory_set);
+    // 再从 ELF 中读出程序入口地址
+    Thread::new(process, elf.header.pt2.entry_point() as usize, None).unwrap()
+}
+
 
 fn kernel_thread_exit() {
     // 当前线程标记为结束

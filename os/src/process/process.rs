@@ -1,7 +1,7 @@
 //! 进程 [`Process`]
 
 use super::*;
-//use crate::fs::*;
+use crate::fs::*;
 use xmas_elf::ElfFile;
 
 /// 进程的信息
@@ -15,7 +15,7 @@ pub struct Process {
 pub struct ProcessInner {
     /// 进程中的线程公用页表 / 内存映射
     pub memory_set: MemorySet,
-  //  pub descriptors: Vec<Arc<dyn INode>>,
+    pub descriptors: Vec<Arc<dyn INode>>,
 }
 
 #[allow(unused)]
@@ -26,22 +26,22 @@ impl Process {
             is_user: false,
             inner: Mutex::new(ProcessInner {
                 memory_set: MemorySet::new_kernel()?,
-                //descriptors: vec![STDIN.clone(), STDOUT.clone()],
+                descriptors: vec![STDIN.clone(), STDOUT.clone()],
             }),
         }))
     }
 
     /// 创建进程，从文件中读取代码
-    /*
+    
     pub fn from_elf(file: &ElfFile, is_user: bool) -> MemoryResult<Arc<Self>> {
         Ok(Arc::new(Self {
             is_user,
             inner: Mutex::new(ProcessInner {
                 memory_set: MemorySet::from_elf(file, is_user)?,
-               // descriptors: vec![STDIN.clone(), STDOUT.clone()],
+                descriptors: vec![STDIN.clone(), STDOUT.clone()],
             }),
         }))
-    }*/
+    }
 
     /// 上锁并获得可变部分的引用
     pub fn inner(&self) -> spin::MutexGuard<ProcessInner> {
@@ -63,7 +63,7 @@ impl Process {
         // memory_set 只能按页分配，所以让 size 向上取整页
         let alloc_size = (size + PAGE_SIZE - 1) & !(PAGE_SIZE - 1);
         // 从 memory_set 中找一段不会发生重叠的空间
-        let mut range = Range::<VirtualAddress>::from(0x80060000..0x80060000 + alloc_size);
+        let mut range = Range::<VirtualAddress>::from(0x80000000..0x80000000 + alloc_size);
         while memory_set.overlap_with(range.into()) {
             range.start += alloc_size;
             range.end += alloc_size;

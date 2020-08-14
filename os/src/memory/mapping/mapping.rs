@@ -99,11 +99,15 @@ impl Mapping {
 
                     // 建立映射
                     let mut frame = FRAME_ALLOCATOR.lock().alloc()?;
+                    println!("page_number frame{}", frame.page_number());
+                    println!("{}",vpn);
+
                     // 更新页表
                     self.map_one(vpn, Some(frame.page_number()), segment.flags)?;
                     // 写入数据
                     (*frame).copy_from_slice(&page_data);
                     // 保存
+
                     self.mapped_pairs.push_back((vpn, frame));
                 }
             }

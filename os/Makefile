@@ -6,6 +6,7 @@ k210 = target/$(target)/$(mode)/k210.bin
 _k210 = target/$(target)/$(mode)/k210.kfpkg
 k210-serialport = /dev/ttyUSB0
 sbi ?= opensbi
+export USER_IMG = ../user/build/raw.img
 
 kernel:
 	cargo build
