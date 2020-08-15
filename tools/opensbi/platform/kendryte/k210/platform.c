@@ -18,13 +18,14 @@
 #include "uarths.h"
 
 #define K210_UART_BAUDRATE 115200
+
 static void k210_paging_init()
 {
-	static uintptr_t BOOT_PAGE_TABLE[1 << RISCV_PGLEVEL_BITS] 
-	__attribute__((aligned(RISCV_PGSIZE)));
+	static uintptr_t BOOT_PAGE_TABLE[1 << RISCV_PGLEVEL_BITS]
+		__attribute__((aligned(RISCV_PGSIZE)));
 
-  	BOOT_PAGE_TABLE[   2] = (0x80000000u >> 12 << 10) | PTE_V | PTE_R | PTE_W | PTE_X | PTE_A | PTE_D;
-  	BOOT_PAGE_TABLE[0776] = (0x80000000u >> 12 << 10) | PTE_V | PTE_R | PTE_W | PTE_X | PTE_A | PTE_D;
+	BOOT_PAGE_TABLE[   2] = (0x80000000u >> 12 << 10) | PTE_V | PTE_R | PTE_W | PTE_X | PTE_A | PTE_D;
+	BOOT_PAGE_TABLE[0776] = (0x80000000u >> 12 << 10) | PTE_V | PTE_R | PTE_W | PTE_X | PTE_A | PTE_D;
 	csr_write(CSR_SATP, (uintptr_t)BOOT_PAGE_TABLE >> RISCV_PGSHIFT);
 
 	// enable Sv39

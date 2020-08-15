@@ -41,11 +41,11 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
     }
     println!("kernel_end = {:#x}", kernel_end as usize);
     println!("_kernel_end = {:#x}", (kernel_end as usize) / 4096);
-    /* 
+     
     {
         let mut processor=PROCESSOR.lock();
         let kernel_process=Process::new_kernel().unwrap();
-        for i in 1..=1usize{
+        for i in 1..=5usize{
             let thread=create_kernel_thread(
                     kernel_process.clone(),
                     sample_process as usize,
@@ -53,9 +53,9 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
                     );
            processor.add_thread(thread);
         }
-    }*/
+    }
 
-    PROCESSOR.lock().add_thread(create_user_process("hello_world"));
+    //PROCESSOR.lock().add_thread(create_user_process("hello_world"));
     
 
     extern "C" {

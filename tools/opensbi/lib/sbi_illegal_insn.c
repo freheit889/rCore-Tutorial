@@ -15,6 +15,7 @@
 #include <sbi/sbi_error.h>
 #include <sbi/sbi_illegal_insn.h>
 #include <sbi/sbi_trap.h>
+#include <sbi/sbi_console.h>
 
 typedef int (*illegal_insn_func)(ulong insn, u32 hartid, ulong mcause,
 				 struct sbi_trap_regs *regs,
@@ -31,6 +32,7 @@ static int system_opcode_insn(ulong insn, u32 hartid, ulong mcause,
 			      struct sbi_trap_regs *regs,
 			      struct sbi_scratch *scratch)
 {
+
 	if(insn == 0x12000073) { // sfence.vma
 		__asm__ volatile (".word 0x10400073");	// sfence.vm
 		regs->mepc += 4;
@@ -126,13 +128,10 @@ int sbi_illegal_insn_handler(u32 hartid, ulong mcause,
 			     struct sbi_trap_regs *regs,
 			     struct sbi_scratch *scratch)
 {
+	//sbi_printf("illegal instruction found!");
 	//ulong insn = csr_read(mbadaddr);
-	
-
-	// K210 priv v1.9 doesn't support mtval
 	uintptr_t epc = csr_read(CSR_MEPC) - 0xffffffff80000000u + 0x80000000u;
-	ulong insn = *(uint32_t*)epc;
-
+	ulong insn = *(uint32_t*)epc;	
 	if (unlikely((insn & 3) != 3)) {
 		if (insn == 0)
 			insn = get_insn(regs->mepc, NULL);
