@@ -53,7 +53,7 @@ impl Context{
         }
         context.sepc=entry_point;
         context.sstatus=sstatus::read();
-        println!("{:?}",sstatus::read()); 
+       // println!("{:?}",sstatus::read()); 
         if is_user{
             context.sstatus.set_spp(User);
         }else{

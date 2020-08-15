@@ -65,7 +65,7 @@ impl Thread {
 
         // 构建线程的 Context
         let context = Context::new(stack.end.into(), entry_point, arguments, process.is_user);
-        println!("{:x?}",context.sstatus);
+        //println!("{:x?}",context.sstatus);
         // 打包成线程
         let thread = Arc::new(Thread {
             id: unsafe {

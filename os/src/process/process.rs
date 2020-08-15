@@ -63,7 +63,7 @@ impl Process {
         // memory_set 只能按页分配，所以让 size 向上取整页
         let alloc_size = (size + PAGE_SIZE - 1) & !(PAGE_SIZE - 1);
         // 从 memory_set 中找一段不会发生重叠的空间
-        let mut range = Range::<VirtualAddress>::from(0x83000000..0x83000000 + alloc_size);
+        let mut range = Range::<VirtualAddress>::from(0x40000000..0x40000000 + alloc_size);
         while memory_set.overlap_with(range.into()) {
             range.start += alloc_size;
             range.end += alloc_size;

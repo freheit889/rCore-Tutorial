@@ -99,8 +99,8 @@ impl Mapping {
 
                     // 建立映射
                     let mut frame = FRAME_ALLOCATOR.lock().alloc()?;
-                    println!("page_number frame{}", frame.page_number());
-                    println!("{}",vpn);
+                    //println!("page_number frame{}", frame.page_number());
+                    //println!("{}",vpn);
 
                     // 更新页表
                     self.map_one(vpn, Some(frame.page_number()), segment.flags)?;
