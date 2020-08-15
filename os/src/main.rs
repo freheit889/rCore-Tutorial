@@ -41,7 +41,7 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
     }
     println!("kernel_end = {:#x}", kernel_end as usize);
     println!("_kernel_end = {:#x}", (kernel_end as usize) / 4096);
-     
+    /* 
     {
         let mut processor=PROCESSOR.lock();
         let kernel_process=Process::new_kernel().unwrap();
@@ -53,9 +53,11 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
                     );
            processor.add_thread(thread);
         }
-    }
-
-    //PROCESSOR.lock().add_thread(create_user_process("hello_world"));
+    }*/
+    unsafe{
+         llvm_asm!("fence.i" :::: "volatile");
+    };
+    PROCESSOR.lock().add_thread(create_user_process("hello_world"));
     
 
     extern "C" {

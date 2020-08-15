@@ -4,6 +4,7 @@ use riscv::register::stvec;
 use riscv::register::scause::Scause;
 use riscv::register::scause::{Exception, Trap, Interrupt};
 use crate::process::PROCESSOR;
+use crate::kernel::syscall_handler;
 
 global_asm!(include_str!("./interrupt.asm"));
 
@@ -39,7 +40,9 @@ pub fn handle_interrupt(context: &mut Context, scause: Scause, stval: usize)->*m
         // 时钟中断
         Trap::Interrupt(Interrupt::SupervisorTimer) => supervisor_timer(context),
         //Trap::Interrupt(Interrupt::SupervisorSoft) => supervisor_timer(context),
-        // 其他情况，终止当前线程
+        // 其他情况，终止当前线
+        Trap::Exception(Exception::UserEnvCall) => syscall_handler(context),
+
         _ => fault("unimplemented interrupt type", scause, stval),
     }
 }
