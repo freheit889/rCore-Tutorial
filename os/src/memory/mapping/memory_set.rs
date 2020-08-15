@@ -133,7 +133,6 @@ impl MemorySet {
                 } else {
                     return Err("unsupported elf format");
                 };
-                        println!("start={},start+size={}",start,start+size);
 
             // 将每一部分作为 Segment 进行映射
             let segment = Segment {
