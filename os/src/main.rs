@@ -58,7 +58,7 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
          llvm_asm!("fence.i" :::: "volatile");
     };
     PROCESSOR.lock().add_thread(create_user_process("hello_world"));
-    
+ 
 
     extern "C" {
         fn __restore(context: usize);

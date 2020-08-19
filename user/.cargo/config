@@ -3,8 +3,8 @@
 target = "riscv64imac-unknown-none-elf"
 
 # 使用我们的 linker script 来进行链接
-[target.riscv64imac-unknown-none-elf]
-rustflags = [
-    "-C", "link-arg=-Tsrc/linker.ld",
-]
+#[target.riscv64imac-unknown-none-elf]
+#rustflags = [
+#    "-C", "link-arg=-Tsrc/linker.ld",
+#]
 
