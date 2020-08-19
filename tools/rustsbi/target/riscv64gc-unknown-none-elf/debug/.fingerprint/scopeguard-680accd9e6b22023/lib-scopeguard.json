@@ -1,0 +1,1 @@
+{"rustc":11719010198259268628,"features":"[]","target":4257383469639592577,"profile":6299028598154287785,"path":4509556119259830795,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"riscv64gc-unknown-none-elf/debug/.fingerprint/scopeguard-680accd9e6b22023/dep-lib-scopeguard"}}],"rustflags":["-C","link-arg=-Tlink-k210.ld"],"metadata":8648443508444719667,"config":0}
