@@ -12,20 +12,18 @@ impl Sd_card {
     }
 }
 
-impl Device for Sd_card {
-    fn read_at(&self, offset: usize, buf: &mut [u8]) -> Result<usize> {
-        let slice = self.0.read();
-        let len = buf.len().min(slice.len() - offset);
-        buf[..len].copy_from_slice(&slice[offset..offset + len]);
-        Ok(len)
+impl BlockDevice for Sd_card {
+    const BLOCK_SIZE_LOG2: u8 =9;
+    fn read_at(&self, block_id: usize, buf: &mut [u8]) -> Result<()> {
+        self.0.lock().read_sector(buf,block_id as u32); 
+        Ok(())
     }
-    fn write_at(&self, offset: usize, buf: &[u8]) -> Result<usize> {
-        let mut slice = self.0.write();
-        let len = buf.len().min(slice.len() - offset);
-        slice[offset..offset + len].copy_from_slice(&buf[..len]);
-        Ok(len)
+    fn write_at(&self, block_id: usize, buf: &[u8]) -> Result<()> {
+        self.0.lock().write_sector(buf,block_id as u32);
+        Ok(())
     }
     fn sync(&self) -> Result<()> {
+        
         Ok(())
     }
 }
