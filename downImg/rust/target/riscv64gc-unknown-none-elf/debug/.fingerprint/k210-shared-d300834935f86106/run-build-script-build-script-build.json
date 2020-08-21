@@ -1,1 +1,0 @@
-{"rustc":11719010198259268628,"features":"","target":0,"profile":0,"path":0,"deps":[[12971532825443345585,"build_script_build",false,3307174793150932940]],"local":[{"RerunIfChanged":{"output":"riscv64gc-unknown-none-elf/debug/build/k210-shared-d300834935f86106/output","paths":["memory.x"]}}],"rustflags":[],"metadata":0,"config":0}

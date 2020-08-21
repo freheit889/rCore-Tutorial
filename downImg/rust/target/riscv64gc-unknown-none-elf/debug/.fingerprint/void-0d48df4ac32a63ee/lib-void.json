@@ -1,1 +1,0 @@
-{"rustc":11719010198259268628,"features":"[]","target":214248268254788652,"profile":6299028598154287785,"path":14657565507518839128,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"riscv64gc-unknown-none-elf/debug/.fingerprint/void-0d48df4ac32a63ee/dep-lib-void"}}],"rustflags":["-C","link-arg=-Tmemory.x","-C","link-arg=-Tlink.x"],"metadata":12916841795283096440,"config":0}

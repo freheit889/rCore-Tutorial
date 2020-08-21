@@ -1,2 +1,0 @@
-cargo:rustc-link-search=/root/k210-sdk-stuff/rust/target/riscv64gc-unknown-none-elf/debug/build/k210-shared-d300834935f86106/out
-cargo:rerun-if-changed=memory.x
