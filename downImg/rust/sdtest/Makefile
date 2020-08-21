@@ -14,7 +14,7 @@ kernel:
 image: kernel
 	rust-objcopy $(kernel) --strip-all -O binary $(image)
 
-burn:image
+down:image
 	python3 built/kflash.py -p $(k210-serialport) -b 1500000 -t $(image)
 
 clean:
