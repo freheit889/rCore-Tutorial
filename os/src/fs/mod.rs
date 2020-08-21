@@ -23,24 +23,15 @@ lazy_static! {
     /// 根文件系统的根目录的 INode
     pub static ref ROOT_INODE: Arc<dyn INode> = {
         let device={
-            extern "C"{
-                fn _user_img_start();
-                fn _user_img_end();
-            }
-
-            let start=_user_img_start as usize;
-            let end=_user_img_end as usize;
-
-            println!("{:x}",start);
             Arc::new(
                 unsafe{
-                    device::MemBuf::new(start, end)
+                    device::sd_card::new(start, end)
                 }
             )
         };
-            let sfs = SimpleFileSystem::open(device).expect("failed to open SFS");
-            sfs.root_inode()
-    };
+        let sfs = SimpleFileSystem::open(device).expect("failed to open SFS");
+        sfs.root_inode()
+    }
 }
 
 /// 触发 [`static@ROOT_INODE`] 的初始化并打印根目录内容

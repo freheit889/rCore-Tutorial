@@ -1,7 +1,7 @@
 use rcore_fs::dev::*;
-use spin::RwLock;
+use spin::{RwLock,Mutex};
 
-pub struct MemBuf(RwLock<&'static mut [u8]>);
+pub struct Sd_card(Mutex<SDCard<SPIImpl<SPI0>>>);
 
 impl MemBuf {
     pub unsafe fn new(begin: usize, end: usize) -> Self {

@@ -8,7 +8,6 @@
 #![feature(drain_filter)]
 
 global_asm!(include_str!("entry.asm"));
-global_asm!(include_str!("link_user.S"));
 
 extern crate alloc;
 
@@ -22,6 +21,7 @@ mod algorithm;
 mod process;
 mod fs;
 mod kernel;
+mod driver;
 
 use process::*;
 use alloc::sync::Arc;
