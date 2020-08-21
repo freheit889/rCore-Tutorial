@@ -108,7 +108,8 @@ fn main() -> ! {
         for i in (end-begin)..endAlign{
             memory[i]=0;
         }
-        
+       
+        writeln!("");// fmt
         for i in 0..endAlign/512{
             sd.write_sector(&mut memory[(i)*512..(i+1)*512], sector).unwrap(); 
             sector+=1;

@@ -29,20 +29,19 @@ use crate::fs::{ROOT_INODE,INodeExt};
 use xmas_elf::ElfFile;
 #[no_mangle]
 pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
-//    println!("Hello world #{}! sp = 0x{:x}", hartid, sp);
     interrupt::init();
     memory::init();
-    println!("");
+    println!("read sd ...");
     fs::init();
-  //  unsafe {
-    //    llvm_asm!("ebreak"::::"volatile");
-    //}
+    
     extern "C" {
         fn kernel_end();
     }
+    
     println!("kernel_end = {:#x}", kernel_end as usize);
     println!("_kernel_end = {:#x}", (kernel_end as usize) / 4096);
      
+    
     {
         let mut processor=PROCESSOR.lock();
         let kernel_process=Process::new_kernel().unwrap();
@@ -58,6 +57,7 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
     unsafe{
          llvm_asm!("fence.i" :::: "volatile");
     };
+    
     PROCESSOR.lock().add_thread(create_user_process("hello_world"));
  
 
