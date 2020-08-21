@@ -78,6 +78,7 @@ fn main() -> ! {
 
     let mut stdout = Stdout(&mut tx);
 
+
     io_init();
 
     let dmac = p.DMAC.configure();
@@ -86,10 +87,10 @@ fn main() -> ! {
     let sd = sdcard::SDCard::new(spi, SD_CS, SD_CS_GPIONUM, &dmac, dma_channel::CHANNEL0);
     
 
+
     let info = sd.init().unwrap();
     let num_sectors = info.CardCapacity / 512;
     let mut sector: u32 =0;
-
      
     extern "C" {
         fn _user_img_start();
@@ -110,12 +111,23 @@ fn main() -> ! {
         
         for i in 0..endAlign/512{
             sd.write_sector(&mut memory[(i)*512..(i+1)*512], sector).unwrap(); 
-            
-        //sd.write_sector(&mut memory, sector).unwrap(); 
             sector+=1;
+            if i%200==0{
+                let p=(sector*100)/(endAlign/512) as u32;
+                write!(stdout,"download sd :    [");
+                for i in 0..p/2{
+                    write!(stdout,"=");
+                }
+                for i in p/2..50{
+                    write!(stdout,"-");
+                }
+                write!(stdout,"]{}%\r",p);
+            }
         }
-        writeln!(stdout, "sector {} succesfully write", sector).unwrap();
-        hexdump(&mut stdout, b"write over",0);
+        writeln!(stdout, "").unwrap();
+
+        writeln!(stdout, "succesfully write").unwrap();
+
     };
     loop{}
 }
