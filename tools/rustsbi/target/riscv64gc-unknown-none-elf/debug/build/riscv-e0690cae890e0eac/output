@@ -1,0 +1,4 @@
+cargo:rustc-link-lib=static=riscv
+cargo:rustc-link-search=/root/test/rCore-Tutorial/tools/rustsbi/target/riscv64gc-unknown-none-elf/debug/build/riscv-e0690cae890e0eac/out
+cargo:rustc-cfg=riscv
+cargo:rustc-cfg=riscv64

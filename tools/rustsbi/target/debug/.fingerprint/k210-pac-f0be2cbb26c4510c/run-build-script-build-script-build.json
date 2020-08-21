@@ -1,0 +1,1 @@
+{"rustc":4002074349584840482,"features":"","target":0,"profile":0,"path":0,"deps":[[13402613036332716554,"build_script_build",false,5092622420462327960]],"local":[{"RerunIfChanged":{"output":"debug/build/k210-pac-f0be2cbb26c4510c/output","paths":["memory-k210.x"]}}],"rustflags":[],"metadata":0,"config":0}

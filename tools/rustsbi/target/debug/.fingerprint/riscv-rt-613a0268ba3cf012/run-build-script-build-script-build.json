@@ -1,0 +1,1 @@
+{"rustc":4002074349584840482,"features":"","target":0,"profile":0,"path":0,"deps":[[18356275279617164004,"build_script_build",false,1952801382142359605]],"local":[{"RerunIfChanged":{"output":"debug/build/riscv-rt-613a0268ba3cf012/output","paths":["build.rs","link.x"]}}],"rustflags":[],"metadata":0,"config":0}

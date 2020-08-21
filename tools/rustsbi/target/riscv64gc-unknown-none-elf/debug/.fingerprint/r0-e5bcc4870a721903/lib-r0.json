@@ -1,0 +1,1 @@
+{"rustc":4002074349584840482,"features":"[]","target":8513734067482788080,"profile":6299028598154287785,"path":12397783942301065654,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"riscv64gc-unknown-none-elf/debug/.fingerprint/r0-e5bcc4870a721903/dep-lib-r0"}}],"rustflags":["-C","link-arg=-Tlink-k210.ld"],"metadata":5958893390975084982,"config":0}

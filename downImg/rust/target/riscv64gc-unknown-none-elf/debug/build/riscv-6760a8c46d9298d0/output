@@ -1,0 +1,4 @@
+cargo:rustc-link-lib=static=riscv
+cargo:rustc-link-search=/root/k210-sdk-stuff/rust/target/riscv64gc-unknown-none-elf/debug/build/riscv-6760a8c46d9298d0/out
+cargo:rustc-cfg=riscv
+cargo:rustc-cfg=riscv64
