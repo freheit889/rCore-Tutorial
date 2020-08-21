@@ -1,19 +1,18 @@
 use rcore_fs::dev::*;
 use spin::{RwLock,Mutex};
+use crate::driver::other::sdcard::SDCard;
+use crate::driver::soc::spi::SPIImpl;
+use k210_pac::SPI0;
 
 pub struct Sd_card(Mutex<SDCard<SPIImpl<SPI0>>>);
 
-impl MemBuf {
-    pub unsafe fn new(begin: usize, end: usize) -> Self {
-        use core::slice;
-        MemBuf(RwLock::new(slice::from_raw_parts_mut(
-            begin as *mut u8,
-            end - begin,
-        )))
+impl Sd_card {
+    pub fn new() -> Self {
+        Sd_card(Mutex::new(crate::driver::other::sdcard::init_sdcard()))
     }
 }
 
-impl Device for MemBuf {
+impl Device for Sd_card {
     fn read_at(&self, offset: usize, buf: &mut [u8]) -> Result<usize> {
         let slice = self.0.read();
         let len = buf.len().min(slice.len() - offset);

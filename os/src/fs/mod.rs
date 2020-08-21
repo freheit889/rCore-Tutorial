@@ -24,14 +24,12 @@ lazy_static! {
     pub static ref ROOT_INODE: Arc<dyn INode> = {
         let device={
             Arc::new(
-                unsafe{
-                    device::sd_card::new(start, end)
-                }
+                    device::Sd_card::new()
             )
         };
         let sfs = SimpleFileSystem::open(device).expect("failed to open SFS");
         sfs.root_inode()
-    }
+    };
 }
 
 /// 触发 [`static@ROOT_INODE`] 的初始化并打印根目录内容
