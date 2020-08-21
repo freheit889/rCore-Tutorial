@@ -109,13 +109,13 @@ fn main() -> ! {
             memory[i]=0;
         }
        
-        writeln!("");// fmt
+        writeln!(stdout,"");// fmt
         for i in 0..endAlign/512{
             sd.write_sector(&mut memory[(i)*512..(i+1)*512], sector).unwrap(); 
             sector+=1;
             if i%200==0{
                 let p=(sector*100)/(endAlign/512) as u32;
-                write!(stdout,"download sd :    [");
+                write!(stdout,"Download Sd :    [");
                 for i in 0..p/2{
                     write!(stdout,"=");
                 }

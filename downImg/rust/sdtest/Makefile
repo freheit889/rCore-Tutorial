@@ -16,6 +16,6 @@ image: kernel
 
 down:image
 	python3 built/kflash.py -p $(k210-serialport) -b 1500000 -t $(image)
-
+	rm raw.img
 clean:
 	cargo clean

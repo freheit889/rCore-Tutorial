@@ -32,6 +32,7 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
     interrupt::init();
     memory::init();
     println!("read sd ...");
+    println!(".....");
     fs::init();
     
     extern "C" {
@@ -42,7 +43,7 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
     println!("_kernel_end = {:#x}", (kernel_end as usize) / 4096);
      
     
-    {
+    /*{
         let mut processor=PROCESSOR.lock();
         let kernel_process=Process::new_kernel().unwrap();
         for i in 1..=1usize{
@@ -53,13 +54,14 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
                     );
            processor.add_thread(thread);
         }
-    }
+    }*/
+
     unsafe{
          llvm_asm!("fence.i" :::: "volatile");
     };
     
-    PROCESSOR.lock().add_thread(create_user_process("hello_world"));
- 
+    //PROCESSOR.lock().add_thread(create_user_process("hello_world"));
+    PROCESSOR.lock().add_thread(create_user_process("user_shell"));
 
     extern "C" {
         fn __restore(context: usize);

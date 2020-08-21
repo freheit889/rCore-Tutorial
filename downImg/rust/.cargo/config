@@ -1,5 +1,4 @@
 [target.riscv64gc-unknown-none-elf]
-runner = "riscv64-unknown-elf-gdb -x gdb_init"
 rustflags = [
   "-C", "link-arg=-Tmemory.x",
   "-C", "link-arg=-Tlink.x",

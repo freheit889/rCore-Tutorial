@@ -28,6 +28,7 @@ lazy_static! {
             )
         };
         let sfs = SimpleFileSystem::open(device).expect("failed to open SFS");
+        println!("open");
         sfs.root_inode()
     };
 }
