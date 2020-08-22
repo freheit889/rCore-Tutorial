@@ -11,6 +11,9 @@ pub struct Condvar {
 
 impl Condvar {
     /// 令当前线程休眠，等待此条件变量
+    pub fn new()->Self{
+        Condvar::default()
+    }
     pub fn wait(&self) {
         self.watchers
             .lock()
@@ -24,4 +27,6 @@ impl Condvar {
             PROCESSOR.lock().wake_thread(thread);
         }
     }
+
+
 }

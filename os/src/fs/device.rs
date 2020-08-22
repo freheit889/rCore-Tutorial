@@ -8,7 +8,6 @@ pub struct Sd_card(Mutex<SDCard<SPIImpl<SPI0>>>);
 
 impl Sd_card {
     pub fn new() -> Self {
-        println!("log");
         Sd_card(Mutex::new(crate::driver::other::sdcard::init_sdcard()))
     }
 }

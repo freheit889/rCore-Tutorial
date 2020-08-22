@@ -1,0 +1,2 @@
+cargo:rustc-link-search=/root/test/rCore-Tutorial/downImg/rust/target/riscv64gc-unknown-none-elf/debug/build/k210-shared-026683c94026c4ed/out
+cargo:rerun-if-changed=memory.x

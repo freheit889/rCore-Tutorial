@@ -56,8 +56,8 @@ pub fn sys_exit(code: isize) -> ! {
     unreachable!()
 }
 
-pub fn sys_open(path:*const u8,flags:i32)->isize{
-    syscall(SYSCALL_OPEN,path as usize,flags as usize,0)
+pub fn sys_open(name:&[u8])->isize{
+    syscall(SYSCALL_OPEN,0,name as *const [u8] as *const u8 as usize,name.len())
 }
 
 pub fn sys_close(fd:i32)->isize{

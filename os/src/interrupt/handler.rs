@@ -34,6 +34,7 @@ pub fn handle_interrupt(context: &mut Context, scause: Scause, stval: usize)->*m
             return processor.prepare_next_thread();
         }
     }
+
     match scause.cause() {
         // 断点中断（ebreak）
         Trap::Exception(Exception::Breakpoint) => breakpoint(context),
@@ -42,7 +43,6 @@ pub fn handle_interrupt(context: &mut Context, scause: Scause, stval: usize)->*m
         //Trap::Interrupt(Interrupt::SupervisorSoft) => supervisor_timer(context),
         // 其他情况，终止当前线
         Trap::Exception(Exception::UserEnvCall) => syscall_handler(context),
-
         _ => fault("unimplemented interrupt type", scause, stval),
     }
 }

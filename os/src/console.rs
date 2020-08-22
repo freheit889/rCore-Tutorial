@@ -63,3 +63,11 @@ macro_rules! println {
     }
 }
 
+pub fn getchar_option() -> Option<char> {
+    let c = crate::sbi::console_getchar() as isize;
+    match c {
+        -1 => None,
+        c => Some(c as u8 as char),
+    }
+}
+

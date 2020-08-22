@@ -9,7 +9,7 @@ use rcore_fs_sfs::SimpleFileSystem;
 use spin::Mutex;
 
 mod config;
-mod inode_ext;
+pub mod inode_ext;
 mod stdin;
 mod stdout;
 mod device;

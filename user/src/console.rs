@@ -9,6 +9,7 @@ use core::fmt::{self, Write};
 /// 实现 [`core::fmt::Write`] trait 来进行格式化输出
 struct Stdout;
 
+
 impl Write for Stdout {
     /// 打印一个字符串
     fn write_str(&mut self, s: &str) -> fmt::Result {
@@ -57,4 +58,7 @@ pub fn getchars() -> String {
     }
 }
 
-
+pub fn open(name:&str)->usize{
+    let name=sys_open(name.as_bytes());
+    return name as usize
+}

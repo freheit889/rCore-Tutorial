@@ -33,7 +33,7 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
     memory::init();
     println!("read sd ...");
     println!(".....");
-    fs::init();
+    //fs::init();
     
     extern "C" {
         fn kernel_end();
@@ -42,27 +42,29 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
     println!("kernel_end = {:#x}", kernel_end as usize);
     println!("_kernel_end = {:#x}", (kernel_end as usize) / 4096);
      
-    
-    /*{
+    /* 
+    {
         let mut processor=PROCESSOR.lock();
         let kernel_process=Process::new_kernel().unwrap();
         for i in 1..=1usize{
             let thread=create_kernel_thread(
                     kernel_process.clone(),
-                    sample_process as usize,
-                    Some(&[i]),
+                    test as usize,
+                    Some(&[])
                     );
            processor.add_thread(thread);
         }
     }*/
 
+
     unsafe{
          llvm_asm!("fence.i" :::: "volatile");
     };
-    
     //PROCESSOR.lock().add_thread(create_user_process("hello_world"));
+    
     PROCESSOR.lock().add_thread(create_user_process("user_shell"));
 
+    //PROCESSOR.lock().add_thread(create_user_process("write"));
     extern "C" {
         fn __restore(context: usize);
     }
@@ -74,6 +76,9 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
 }
 fn sample_process(id: usize) {
     println!("hello from kernel thread {}", id);
+}
+fn test(){
+    let app = ROOT_INODE.find("hello_world").unwrap();
 }
 
 pub fn create_kernel_thread(

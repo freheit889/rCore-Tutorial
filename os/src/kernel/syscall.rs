@@ -2,6 +2,8 @@
 
 use super::*;
 
+pub const SYS_OPEN: usize = 56;
+pub const SYS_CLOSE: usize = 57;
 pub const SYS_READ: usize = 63;
 pub const SYS_WRITE: usize = 64;
 pub const SYS_EXIT: usize = 93;
@@ -31,6 +33,9 @@ pub fn syscall_handler(context: &mut Context) -> *mut Context {
         SYS_WRITE => sys_write(args[0], args[1] as *mut u8, args[2]),
         SYS_EXIT => sys_exit(args[0]),
         SYS_EXEC=>sys_exec(args[0] as *const u8),
+        SYS_OPEN=>sys_open(args[1] as *mut u8,args[2]),
+        //SYS_CLOSE=>sys_close(args[0] as i32),
+    
         _ => {
             println!("unimplemented syscall: {}", syscall_id);
             SyscallResult::Kill
