@@ -1,2 +1,0 @@
-cargo:rerun-if-env-changed=USER_IMG
-cargo:rerun-if-changed=sdtest/raw.img

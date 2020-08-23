@@ -70,19 +70,11 @@ pub(super) fn sys_open(buffer:*mut u8,size:usize)->SyscallResult{
             let buffer=from_raw_parts_mut(buffer, size);
             String::from_utf8_lossy(buffer)
         };
-        //let thread=PROCESSOR.lock().current_thread();
+        let file=ROOT_INODE.find(&fileName).unwrap();
+        let thread=PROCESSOR.lock().current_thread();
+        thread.process.inner().descriptors.push(file);
 
-        println!("point-2");
-        ROOT_INODE.ls();
-        //let file=ROOT_INODE.find(&fileName).unwrap();
-        println!("point-1");
-        //let thread=PROCESSOR.lock().current_thread();
-        println!("point0");
-        //thread.process.inner().descriptors.push(file);
-        println!("point1");
+        let x:isize=(thread.process.inner().descriptors.len()-1) as isize;
 
-        //let x:isize=(thread.process.inner().descriptors.len()-1) as isize;
-
-        //println!("{}",x);
-        SyscallResult::Proceed(1)
+        SyscallResult::Proceed(x)
 }

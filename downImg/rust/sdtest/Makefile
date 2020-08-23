@@ -8,14 +8,14 @@ export USER_IMG =sdtest/raw.img
 
 
 kernel:
-	cp -rf ../../../user/build/raw.img .
-	cargo build
+	@cp -rf ../../../user/build/raw.img .
+	@cargo build
 
 image: kernel
-	rust-objcopy $(kernel) --strip-all -O binary $(image)
+	@rust-objcopy $(kernel) --strip-all -O binary $(image)
 
 down:image
-	python3 built/kflash.py -p $(k210-serialport) -b 1500000 -t $(image)
-	rm raw.img
+	@python3 built/kflash.py -p $(k210-serialport) -b 1500000 -t $(image)
+	@rm raw.img
 clean:
-	cargo clean
+	@cargo clean

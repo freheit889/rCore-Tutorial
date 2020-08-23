@@ -32,8 +32,7 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
     interrupt::init();
     memory::init();
     println!("read sd ...");
-    println!(".....");
-    //fs::init();
+    fs::init();
     
     extern "C" {
         fn kernel_end();
@@ -62,9 +61,9 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
     };
     //PROCESSOR.lock().add_thread(create_user_process("hello_world"));
     
-    PROCESSOR.lock().add_thread(create_user_process("user_shell"));
+    //PROCESSOR.lock().add_thread(create_user_process("user_shell"));
 
-    //PROCESSOR.lock().add_thread(create_user_process("write"));
+    PROCESSOR.lock().add_thread(create_user_process("write"));
     extern "C" {
         fn __restore(context: usize);
     }

@@ -1,5 +1,0 @@
-cargo:rustc-link-lib=static=riscv-rt
-cargo:rustc-link-search=/root/test/rCore-Tutorial/downImg/rust/target/riscv64gc-unknown-none-elf/debug/build/riscv-rt-17c0e427833d0991/out
-cargo:rustc-link-search=/root/test/rCore-Tutorial/downImg/rust/target/riscv64gc-unknown-none-elf/debug/build/riscv-rt-17c0e427833d0991/out
-cargo:rerun-if-changed=build.rs
-cargo:rerun-if-changed=link.x

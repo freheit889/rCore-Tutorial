@@ -17,8 +17,7 @@ pub (super) fn sys_exec(path:*const u8)->SyscallResult{
     
     let name=unsafe{from_cstr(path)};
     let app = ROOT_INODE.find(name);
-    println!("ss");
-    /*match app{
+    match app{
         Ok(inode)=>{
             let data = inode.readall().unwrap();
             let elf = ElfFile::new(data.as_slice()).unwrap();
@@ -26,12 +25,12 @@ pub (super) fn sys_exec(path:*const u8)->SyscallResult{
             let thread=Thread::new(process, elf.header.pt2.entry_point() as usize, None).unwrap();
             PROCESSOR.lock().add_thread(thread);
             PROCESSOR.lock().sleep_current_thread();     
-        
+  	    PROCESSOR.lock().prepare_next_thread(); 
         },
         Err(_)=>{
             println!("commit not found");
         }
-    }*/
+    }
     SyscallResult::Proceed(0)
   
 }
