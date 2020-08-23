@@ -67,6 +67,11 @@ impl Mapping {
                     }
                 }
             }
+			MapType::device =>{
+				for vpn in segment.page_range().iter() {
+                    self.map_one(VirtualPageNumber(usize::from(vpn)-0xffffffff00000), Some((usize::from(vpn)-0xffffffff00000).into()), segment.flags | Flags::VALID)?;
+                }
+			}
             // 需要分配帧进行映射
             MapType::Framed => {
                 for vpn in segment.page_range().iter() {

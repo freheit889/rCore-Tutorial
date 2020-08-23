@@ -9,10 +9,10 @@ pub const PAGE_SIZE_BITS: usize = 12;
 pub const MEMORY_START_ADDRESS: PhysicalAddress = PhysicalAddress(0x8000_0000);
 pub const MEMORY_END_ADDRESS: PhysicalAddress = PhysicalAddress(0x8060_0000);
 
-pub const CLINT_START_ADDRESS: PhysicalAddress = PhysicalAddress(0x02000000);
-pub const CLINT_END_ADDRESS: PhysicalAddress = PhysicalAddress(0x03ffffff);
 pub const UART_START_ADDRESS: PhysicalAddress = PhysicalAddress(0x38000000);
-pub const UART_END_ADDRESS: PhysicalAddress = PhysicalAddress(0x38100000);
+pub const UART_END_ADDRESS: PhysicalAddress = PhysicalAddress(0x40000000);
+pub const SYSCTL_START_ADDRESS: PhysicalAddress = PhysicalAddress(0x50440000);
+pub const SYSCTL_END_ADDRESS: PhysicalAddress = PhysicalAddress(0x60000000);
 
 pub const KERNEL_MAP_OFFSET: usize = 0xffff_ffff_0000_0000;
 

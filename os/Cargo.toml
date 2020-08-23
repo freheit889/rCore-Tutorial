@@ -18,8 +18,6 @@ xmas-elf = "0.7.0"
 rcore-fs = { git = "https://github.com/rcore-os/rcore-fs" }
 rcore-fs-sfs = { git = "https://github.com/rcore-os/rcore-fs"  }
 
-#rcore-fs = { path = "packet/rcore-fs/rcore-fs" }
-#rcore-fs-sfs = { path = "packet/rcore-fs/rcore-fs-sfs/"  }
 k210-hal = { path = "packet/k210-hal" }
 k210-pac = { path = "packet/k210-pac" }
 

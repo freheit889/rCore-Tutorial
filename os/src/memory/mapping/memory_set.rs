@@ -37,15 +37,15 @@ impl MemorySet {
         // 建立字段
         let segments = vec![
             // .text 段，r-x
+			
             Segment {
-                map_type: MapType::Linear,
-                range: Range::from(CLINT_START_ADDRESS..CLINT_END_ADDRESS),
+                map_type: MapType::device,
+                range: Range::from(UART_START_ADDRESS..UART_END_ADDRESS),
                 flags: Flags::READABLE | Flags::WRITABLE,
             },
-
-            Segment {
-                map_type: MapType::Linear,
-                range: Range::from(UART_START_ADDRESS..UART_END_ADDRESS),
+			Segment {
+                map_type: MapType::device,
+                range: Range::from(SYSCTL_START_ADDRESS..SYSCTL_END_ADDRESS),
                 flags: Flags::READABLE | Flags::WRITABLE,
             },
             Segment {
@@ -72,6 +72,11 @@ impl MemorySet {
                 flags: Flags::READABLE | Flags::WRITABLE,
             },
             // 剩余内存空间，rw-
+			Segment {
+                map_type: MapType::Linear,
+                range: Range::from(*KERNEL_END_ADDRESS..MEMORY_END_ADDRESS.into()),
+                flags: Flags::READABLE | Flags::WRITABLE,
+            },
         ];
         let mut mapping = Mapping::new()?;
         // 每个字段在页表中进行映射

@@ -8,8 +8,7 @@ use alloc::string::String;
 use user_lib::console::*;
 use user_lib::syscall::{sys_close, sys_open, sys_read, sys_write};
 const BUFFER_SIZE:usize=30;
-const FILE:&'static str="tmp\0";
-const TEXT:&'static str="Hello user program xxxxxxxx\0";
+const FILE:&'static str="tmp";
 
 #[no_mangle]
 pub fn main()->usize{
