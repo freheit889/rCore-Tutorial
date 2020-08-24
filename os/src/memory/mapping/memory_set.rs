@@ -78,7 +78,7 @@ impl MemorySet {
                 flags: Flags::READABLE | Flags::WRITABLE,
             },
         ];
-        let mut mapping = Mapping::new()?;
+        let mut mapping = Mapping::new(KERNEL_PROCESS_FRAME_QUOTA)?;
         // 每个字段在页表中进行映射
         for segment in segments.iter() {
             mapping.map(segment, None)?;

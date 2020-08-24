@@ -3,18 +3,21 @@
 //! 许多方法返回 [`Result`]，如果出现错误会返回 `Err(message)`。设计目标是，此时如果终止线程，则不会产生后续问题。
 //! 但是如果错误是由操作系统代码逻辑产生的，则会直接 panic。
 
+use crate::fs::SwapTracker;
 use crate::memory::{
     address::*,
     config::PAGE_SIZE,
     frame::{FrameTracker, FRAME_ALLOCATOR},
-    mapping::{Flags, MapType, PageTable, PageTableEntry, PageTableTracker, Segment},
     MemoryResult,
+    mapping::{
+        Flags, MapType, PageTable, PageTableEntry, PageTableTracker, Segment, Swapper, SwapperImpl,
+    },
 };
 use alloc::{collections::VecDeque, vec, vec::Vec};
 use core::cmp::min;
 use core::ptr::slice_from_raw_parts_mut;
+use hashbrown::HashMap;
 
-#[derive(Default)]
 /// 某个线程的内存映射关系
 pub struct Mapping {
     /// 保存所有使用到的页表
@@ -22,7 +25,9 @@ pub struct Mapping {
     /// 根页表的物理页号
     root_ppn: PhysicalPageNumber,
     /// 所有分配的物理页面映射信息
-    mapped_pairs: VecDeque<(VirtualPageNumber, FrameTracker)>,
+    mapped_pairs: SwapperImpl,
+    
+    swapped_pages: HashMap<VirtualPageNumber, SwapTracker>,
 }
 
 impl Mapping {
@@ -39,14 +44,15 @@ impl Mapping {
     }
 
     /// 创建一个有根节点的映射
-    pub fn new() -> MemoryResult<Mapping> {
+    pub fn new(frame_quota:usize) -> MemoryResult<Mapping> {
         let root_table = PageTableTracker::new(FRAME_ALLOCATOR.lock().alloc()?);
         let root_ppn = root_table.page_number();
         Ok(Mapping {
             page_tables: vec![root_table],
             root_ppn,
-            mapped_pairs: VecDeque::new(),
-        })
+            mapped_pairs: SwapperImpl::new(frame_quota),
+            swapped_pages: HashMap::new(),
+	})
     }
 
     /// 加入一段映射，可能会相应地分配物理页面
@@ -67,57 +73,70 @@ impl Mapping {
                     }
                 }
             }
-			MapType::device =>{
-				for vpn in segment.page_range().iter() {
-                    self.map_one(VirtualPageNumber(usize::from(vpn)-0xffffffff00000), Some((usize::from(vpn)-0xffffffff00000).into()), segment.flags | Flags::VALID)?;
+	    MapType::device =>{
+		    for vpn in segment.page_range().iter() {
+                    	self.map_one(VirtualPageNumber(usize::from(vpn)-0xffffffff00000), Some((usize::from(vpn)-0xffffffff00000).into()), segment.flags | Flags::VALID)?;
                 }
-			}
-            // 需要分配帧进行映射
+	    }
             MapType::Framed => {
                 for vpn in segment.page_range().iter() {
-                    // 页面的数据，默认为全零
-                    let mut page_data = [0u8; PAGE_SIZE];
-                    // 如果提供了数据，则使用这些数据来填充 page_data
-                    if let Some(init_data) = init_data {
-                        if !init_data.is_empty() {
-                            // 这里必须进行一些调整，因为传入的数据可能并非按照整页对齐
+                    // 如果有初始化数据，找到相应的数据
+                    let page_data = if init_data.is_none() || init_data.unwrap().is_empty() {
+                        [0u8; PAGE_SIZE]
+                    } else {
+                        // 这里必须进行一些调整，因为传入的数据可能并非按照整页对齐
 
-                            // 拷贝时必须考虑区间与整页不对齐的情况
-                            //    start（仅第一页时非零）
-                            //      |        stop（仅最后一页时非零）
-                            // 0    |---data---|          4096
-                            // |------------page------------|
-                            let page_address = VirtualAddress::from(vpn);
-                            let start = if segment.range.start > page_address {
-                                segment.range.start - page_address
-                            } else {
-                                0
-                            };
-                            let stop = min(PAGE_SIZE, segment.range.end - page_address);
-                            // 计算来源和目标区间并进行拷贝
-                            let dst_slice = &mut page_data[start..stop];
-                            let src_slice = &init_data[(page_address + start - segment.range.start)
-                                ..(page_address + stop - segment.range.start)];
-                            dst_slice.copy_from_slice(src_slice);
-                        }
+                        // 传入的初始化数据
+                        let init_data = init_data.unwrap();
+                        // 整理后将要返回的一整个页面的数据
+                        let mut page_data = [0u8; PAGE_SIZE];
+
+                        // 拷贝时必须考虑区间与整页不对齐的情况
+                        //    start（仅第一页时非零）
+                        //      |        stop（仅最后一页时非零）
+                        // 0    |---data---|          4096
+                        // |------------page------------|
+                        let page_address = VirtualAddress::from(vpn);
+                        let start = if segment.range.start > page_address {
+                            segment.range.start - page_address
+                        } else {
+                            0
+                        };
+                        let stop = min(PAGE_SIZE, segment.range.end - page_address);
+                        // 计算来源和目标区间并进行拷贝
+                        let dst_slice = &mut page_data[start..stop];
+                        let src_slice = &init_data[(page_address + start - segment.range.start)
+                            ..(page_address + stop - segment.range.start)];
+                        dst_slice.copy_from_slice(src_slice);
+
+                        page_data
                     };
-
-                    // 建立映射
-                    let mut frame = FRAME_ALLOCATOR.lock().alloc()?;
-                    //println!("page_number frame{}", frame.page_number());
-                    //println!("{}",vpn);
-
-                    // 更新页表
-                    self.map_one(vpn, Some(frame.page_number()), segment.flags)?;
-                    // 写入数据
-                    (*frame).copy_from_slice(&page_data);
-                    // 保存
-
-                    self.mapped_pairs.push_back((vpn, frame));
+                    // 建立映射，先检查是否有配额来分配新的物理页面
+                    if !self.mapped_pairs.full() {
+                        // 有配额，分配新的物理页面
+                        let mut frame = FRAME_ALLOCATOR.lock().alloc()?;
+                        // 更新页表
+                        let entry = self.map_one(vpn, Some(frame.page_number()), segment.flags)?;
+                        // 写入数据
+                        (*frame).copy_from_slice(&page_data);
+                        // 保存
+                        self.mapped_pairs.push(vpn, frame, entry);
+                    } else {
+                        // 配额用完，改为在置换文件中分配一个页面
+                        let swap_page = SwapTracker::new()?;
+                        
+			
+			// 更新页表
+                        self.map_one(vpn, None, segment.flags)?;
+                        // 写入数据
+                        swap_page.write(&page_data);
+                        // 保存
+                        self.swapped_pages.insert(vpn, swap_page);
+                    }
                 }
             }
         }
-        Ok(())
+	Ok(())
     }
 
     /// 移除一段映射
@@ -129,8 +148,9 @@ impl Mapping {
             entry.clear();
         }
         // 移除相应的页面
-        self.mapped_pairs.retain(|(vpn, _)| !segment.page_range().contains(*vpn))
-    }
+    	self.mapped_pairs.retain(|vpn| !segment.page_range().contains(*vpn));
+        self.swapped_pages.retain(|vpn, _| !segment.page_range().contains(*vpn));
+     }
 
     /// 找到给定虚拟页号的三级页表项
     ///
@@ -142,15 +162,13 @@ impl Mapping {
         let mut entry = &mut root_table.entries[vpn.levels()[0]];
         for vpn_slice in &vpn.levels()[1..] {
             if entry.is_empty() {
-                // 如果页表不存在，则需要分配一个新的页表
-                let new_table = PageTableTracker::new(FRAME_ALLOCATOR.lock().alloc()?);
-                let new_ppn = new_table.page_number();
-                // 将新页表的页号写入当前的页表项
+
+               	let new_table = PageTableTracker::new(FRAME_ALLOCATOR.lock().alloc()?);
+		let new_ppn = new_table.page_number();
                 *entry = PageTableEntry::new(Some(new_ppn), Flags::VALID);
-                // 保存页表
                 self.page_tables.push(new_table);
-            }
-            // 进入下一级页表（使用偏移量来访问物理地址）
+
+	    }
             entry = &mut entry.get_next_table().entries[*vpn_slice];
         }
         // 此时 entry 位于第三级页表
@@ -162,8 +180,7 @@ impl Mapping {
         let mut current_ppn;
         unsafe {
             llvm_asm!("csrr $0, satp" : "=r"(current_ppn) ::: "volatile");
-            current_ppn ^= 8 << 60;
-        }
+	 }
 
         let root_table: &PageTable =
             PhysicalAddress::from(PhysicalPageNumber(current_ppn)).deref_kernel();
@@ -193,12 +210,66 @@ impl Mapping {
         vpn: VirtualPageNumber,
         ppn: Option<PhysicalPageNumber>,
         flags: Flags,
-    ) -> MemoryResult<()> {
+    ) -> MemoryResult<*mut PageTableEntry> {
         // 定位到页表项
         let entry = self.find_entry(vpn)?;
         assert!(entry.is_empty(), "virtual address is already mapped");
         // 页表项为空，则写入内容
         *entry = PageTableEntry::new(ppn, flags);
+        Ok(entry)
+    }
+fn remap_one(
+        &mut self,
+        vpn: VirtualPageNumber,
+        ppn: PhysicalPageNumber,
+    ) -> MemoryResult<*mut PageTableEntry> {
+        let entry = self.find_entry(vpn)?;
+        assert!(!entry.is_empty() && !entry.is_valid());
+        // 设置页表项的物理页号和 Valid 标志
+        entry.update_page_number(Some(ppn));
+        Ok(entry)
+    }
+
+    /// 处理缺页异常
+    pub fn handle_page_fault(&mut self, stval: usize) -> MemoryResult<()> {
+        // 发生异常的访问页面
+        let vpn = VirtualPageNumber::floor(stval.into());
+        // 该页面如果在进程的内存中，则应该在 Swap 中，将其取出
+        let swap_tracker: SwapTracker = self
+            .swapped_pages
+            .remove(&vpn)
+            .ok_or("stval page is not mapped")?;
+        // 读取该页面的数据
+        let page_data = swap_tracker.read();
+
+        if self.mapped_pairs.full() {
+            // 取出一个映射
+            let (popped_vpn, mut popped_frame) = self.mapped_pairs.pop().unwrap();
+            // 交换数据
+            swap_tracker.write(&*popped_frame);
+            (*popped_frame).copy_from_slice(&page_data);
+            // 修改页表映射
+            self.invalidate_one(popped_vpn)?;
+            let entry = self.remap_one(vpn, popped_frame.page_number())?;
+            // 更新记录
+            self.mapped_pairs.push(vpn, popped_frame, entry);
+            self.swapped_pages.insert(popped_vpn, swap_tracker);
+        } else {
+            // 添加新的映射
+            let mut frame = FRAME_ALLOCATOR.lock().alloc()?;
+            // 复制数据
+            (*frame).copy_from_slice(&page_data);
+            // 更新映射
+            let entry = self.remap_one(vpn, frame.page_number())?;
+            // 更新记录
+            self.mapped_pairs.push(vpn, frame, entry);
+        }
+        Ok(())
+    }
+    fn invalidate_one(&mut self, vpn: VirtualPageNumber) -> MemoryResult<()> {
+        let entry = self.find_entry(vpn).expect("swapping out unmapped address");
+        assert!(entry.is_valid());
+        entry.update_page_number(None);
         Ok(())
     }
 }

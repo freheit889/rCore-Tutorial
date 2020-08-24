@@ -5,3 +5,8 @@ pub trait Allocator {
     fn alloc(&mut self) -> Option<usize>;
     fn dealloc(&mut self, index: usize);
 }
+
+pub use stacked_allocator::StackedAllocator;
+
+/// 默认使用的分配器
+pub type AllocatorImpl = StackedAllocator;

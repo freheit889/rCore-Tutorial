@@ -41,27 +41,33 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
     println!("kernel_end = {:#x}", kernel_end as usize);
     println!("_kernel_end = {:#x}", (kernel_end as usize) / 4096);
      
-    /* 
-    {
+    
+    PROCESSOR.lock().add_thread(create_kernel_thread(
+        Process::new_kernel().unwrap(),
+        test_page_fault as usize,
+        None,
+    ));
+     
+     
+   /*{
         let mut processor=PROCESSOR.lock();
         let kernel_process=Process::new_kernel().unwrap();
         for i in 1..=1usize{
             let thread=create_kernel_thread(
                     kernel_process.clone(),
-                    test as usize,
-                    Some(&[])
+                    sample_process as usize,
+                    Some(&[i])
                     );
            processor.add_thread(thread);
         }
     }*/
-
 
     unsafe{
          llvm_asm!("fence.i" :::: "volatile");
     };
     //PROCESSOR.lock().add_thread(create_user_process("hello_world"));
     
-    PROCESSOR.lock().add_thread(create_user_process("user_shell"));
+    //PROCESSOR.lock().add_thread(create_user_process("user_shell"));
 
     //PROCESSOR.lock().add_thread(create_user_process("write"));
     extern "C" {
@@ -76,9 +82,6 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
 }
 fn sample_process(id: usize) {
     println!("hello from kernel thread {}", id);
-}
-fn test(){
-    let app = ROOT_INODE.find("hello_world").unwrap();
 }
 
 pub fn create_kernel_thread(
@@ -121,4 +124,13 @@ fn kernel_thread_exit() {
     unsafe { llvm_asm!("ebreak" :::: "volatile") };
 }
 
-
+fn test_page_fault() {
+    let mut array = [0usize; 10 * 1024];
+    for i in 0..array.len() {
+        array[i] = i;
+    }
+    for i in 0..array.len() {
+        assert_eq!(i, array[i]);
+    }
+    println!("\x1b[32mtest passed\x1b[0m");
+}

@@ -75,6 +75,9 @@ impl PageTableEntry {
             || flags.contains(Flags::WRITABLE)
             || flags.contains(Flags::EXECUTABLE))
     }
+    pub fn is_valid(&self) -> bool {
+        self.flags().contains(Flags::VALID)
+    }
 }
 
 impl core::fmt::Debug for PageTableEntry {

@@ -43,6 +43,10 @@ pub fn handle_interrupt(context: &mut Context, scause: Scause, stval: usize)->*m
         //Trap::Interrupt(Interrupt::SupervisorSoft) => supervisor_timer(context),
         // 其他情况，终止当前线
         Trap::Exception(Exception::UserEnvCall) => syscall_handler(context),
+	Trap::Exception(Exception::LoadFault)
+        | Trap::Exception(Exception::StorePageFault)
+        | Trap::Exception(Exception::StoreFault)
+	| Trap::Exception(Exception::InstructionPageFault) => page_fault(context, scause, stval),
         _ => fault("unimplemented interrupt type", scause, stval),
     }
 }
@@ -69,4 +73,22 @@ fn fault(msg:&str, scause: Scause, stval: usize)->*mut Context {
     PROCESSOR.lock().kill_current_thread();
     PROCESSOR.lock().prepare_next_thread()
 
+}
+
+fn page_fault(context: &mut Context, scause: Scause, stval: usize) -> *mut Context {
+    static mut COUNT: usize = 0;
+    println!("page_fault {}", unsafe {
+        COUNT += 1;
+        COUNT
+    });
+    let current_thread = PROCESSOR.lock().current_thread();
+    let memory_set = &mut current_thread.process.inner().memory_set;
+
+    match memory_set.mapping.handle_page_fault(stval) {
+        Ok(_) => {
+            memory_set.activate();
+            context
+        }
+        Err(msg) => fault(msg, scause, stval),
+    }
 }

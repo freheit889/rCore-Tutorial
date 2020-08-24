@@ -29,6 +29,7 @@ _k210: image
 	rm -rf built/temp
 
 run-k210: k210
+	@sudo chmod 777 $(k210-serialport)
 	python3 built/kflash.py -p $(k210-serialport) -b 1500000 -t $(k210)
 
 build: image

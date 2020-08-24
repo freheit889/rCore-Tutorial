@@ -8,6 +8,7 @@ use lazy_static::lazy_static;
 use rcore_fs_sfs::SimpleFileSystem;
 use spin::Mutex;
 
+mod swap;
 mod config;
 pub mod inode_ext;
 mod stdin;
@@ -18,6 +19,7 @@ pub use inode_ext::INodeExt;
 pub use rcore_fs::{dev::block_cache::BlockCache, vfs::*};
 pub use stdin::STDIN;
 pub use stdout::STDOUT;
+pub use swap::SwapTracker;
 
 lazy_static! {
     /// 根文件系统的根目录的 INode
