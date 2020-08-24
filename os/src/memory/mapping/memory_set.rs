@@ -37,13 +37,18 @@ impl MemorySet {
         // 建立字段
         let segments = vec![
             // .text 段，r-x
-			
+	    Segment {
+                map_type: MapType::device,
+                range: Range::from(SWAP_START_ADDRESS..SWAP_END_ADDRESS),
+                flags: Flags::READABLE | Flags::WRITABLE,
+            },
+		
             Segment {
                 map_type: MapType::device,
                 range: Range::from(UART_START_ADDRESS..UART_END_ADDRESS),
                 flags: Flags::READABLE | Flags::WRITABLE,
             },
-			Segment {
+	    Segment {
                 map_type: MapType::device,
                 range: Range::from(SYSCTL_START_ADDRESS..SYSCTL_END_ADDRESS),
                 flags: Flags::READABLE | Flags::WRITABLE,

@@ -41,14 +41,16 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
     println!("kernel_end = {:#x}", kernel_end as usize);
     println!("_kernel_end = {:#x}", (kernel_end as usize) / 4096);
      
-    
-    PROCESSOR.lock().add_thread(create_kernel_thread(
+     
+    //swap test
+    /*PROCESSOR.lock().add_thread(create_kernel_thread(
         Process::new_kernel().unwrap(),
         test_page_fault as usize,
         None,
-    ));
+    ));*/
      
-     
+
+   //kernel thread test     
    /*{
         let mut processor=PROCESSOR.lock();
         let kernel_process=Process::new_kernel().unwrap();
@@ -65,9 +67,12 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
     unsafe{
          llvm_asm!("fence.i" :::: "volatile");
     };
+     
+    //user thread test
+
     //PROCESSOR.lock().add_thread(create_user_process("hello_world"));
     
-    //PROCESSOR.lock().add_thread(create_user_process("user_shell"));
+    PROCESSOR.lock().add_thread(create_user_process("user_shell"));
 
     //PROCESSOR.lock().add_thread(create_user_process("write"));
     extern "C" {
@@ -125,7 +130,7 @@ fn kernel_thread_exit() {
 }
 
 fn test_page_fault() {
-    let mut array = [0usize; 10 * 1024];
+    let mut array = [0usize; 256 * 1024];
     for i in 0..array.len() {
         array[i] = i;
     }

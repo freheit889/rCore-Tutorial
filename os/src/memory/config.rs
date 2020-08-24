@@ -17,7 +17,7 @@ pub const SYSCTL_END_ADDRESS: PhysicalAddress = PhysicalAddress(0x60000000);
 pub const KERNEL_MAP_OFFSET: usize = 0xffff_ffff_0000_0000;
 
 pub const USER_PROCESS_FRAME_QUOTA: usize = 16;
-pub const KERNEL_PROCESS_FRAME_QUOTA: usize = 16;
+pub const KERNEL_PROCESS_FRAME_QUOTA: usize = 32;
 
 lazy_static! {
     pub static ref KERNEL_END_ADDRESS: VirtualAddress =VirtualAddress::from(kernel_end as usize);
