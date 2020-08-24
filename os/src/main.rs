@@ -61,14 +61,15 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
     };
     //PROCESSOR.lock().add_thread(create_user_process("hello_world"));
     
-    //PROCESSOR.lock().add_thread(create_user_process("user_shell"));
+    PROCESSOR.lock().add_thread(create_user_process("user_shell"));
 
-    PROCESSOR.lock().add_thread(create_user_process("write"));
+    //PROCESSOR.lock().add_thread(create_user_process("write"));
     extern "C" {
         fn __restore(context: usize);
     }
     // 获取第一个线程的 Context
     let context = PROCESSOR.lock().prepare_next_thread();
+    //println!("context:{:?}",context);
     // 启动第一个线程
     unsafe { __restore(context as usize) };
     panic!();

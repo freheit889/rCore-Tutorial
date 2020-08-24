@@ -32,7 +32,7 @@ pub fn syscall_handler(context: &mut Context) -> *mut Context {
         SYS_READ => sys_read(args[0], args[1] as *mut u8, args[2]),
         SYS_WRITE => sys_write(args[0], args[1] as *mut u8, args[2]),
         SYS_EXIT => sys_exit(args[0]),
-        SYS_EXEC=>sys_exec(args[0] as *const u8),
+        SYS_EXEC=>sys_exec(args[0] as *const u8,*context),
         SYS_OPEN=>sys_open(args[1] as *mut u8,args[2]),
         //SYS_CLOSE=>sys_close(args[0] as i32),
     

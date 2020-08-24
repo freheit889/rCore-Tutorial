@@ -88,11 +88,11 @@ impl Processor {
             } else {
                 // 有休眠线程，则等待中断
                 for i in self.sleeping_threads.iter(){
-					let thread=i.clone();
-					self.wake_thread(thread);
-					break;
-				}
-				self.prepare_next_thread()
+			let thread=i.clone();
+			self.wake_thread(thread);
+			break;
+		}
+		self.prepare_next_thread()
 				
             }
         }

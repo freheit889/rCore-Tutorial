@@ -15,6 +15,7 @@ use user_lib::console::getchar;
 
 #[no_mangle]
 pub fn main(){
+    println!("");
     println!("Rust user shell");
     let mut line:String=String::new();
     
@@ -26,9 +27,10 @@ pub fn main(){
                 println!("");
                 if !line.is_empty(){
                     line.push('\0');
-                    println!("searching for program:{}",line);
-                    sys_exec(line.as_ptr());
-                    line.clear();
+                    println!("");
+		    println!("searching for program:{}",line);
+		    sys_exec(line.as_ptr());
+		    line.clear();
                 }
             print!(">> ")
             }

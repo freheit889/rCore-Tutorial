@@ -10,10 +10,11 @@ pub(super) fn sys_exit(code: usize) -> SyscallResult {
         PROCESSOR.lock().current_thread().id,
         code
     );
+    println!("");
     SyscallResult::Kill
 }
 
-pub (super) fn sys_exec(path:*const u8)->SyscallResult{
+pub (super) fn sys_exec(path:*const u8,context:Context)->SyscallResult{
     
     let name=unsafe{from_cstr(path)};
     let app = ROOT_INODE.find(name);
@@ -24,10 +25,12 @@ pub (super) fn sys_exec(path:*const u8)->SyscallResult{
             let process = Process::from_elf(&elf, true).unwrap();
             let thread=Thread::new(process, elf.header.pt2.entry_point() as usize, None).unwrap();
             PROCESSOR.lock().add_thread(thread);
-            PROCESSOR.lock().sleep_current_thread();     
+            PROCESSOR.lock().sleep_current_thread();    
+            PROCESSOR.lock().park_current_thread(&context); 
   	    PROCESSOR.lock().prepare_next_thread(); 
         },
         Err(_)=>{
+	    println!("");
             println!("commit not found");
         }
     }
