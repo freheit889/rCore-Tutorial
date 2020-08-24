@@ -5,22 +5,44 @@ rCore移植k210
 * 在opensbi上运行lab1-6
 * 在rustsbi上运行lab1-6
 * 在sd卡上读写用户态
+* 虚拟存储
 
 ### 已支持的系统调用
 * sys_open
 * sys_exec
 
 ### 未实现
+ * busyBox
  * 更多用户态的支持
  * 多核支持
 
+### 环境配置
+#### 安装rust
+
+```
+curl https://sh.rustup.rs -sSf | sh
+source $HOME/.cargo/env
+```
+
+进入rCore文件夹下 执行 
+```
+rustup target add riscv64imac-unknown-none-elf
+cargo install cargo-binutils
+rustup component add llvm-tools-preview
+```
+等待cargo将所有依赖包装完之后 环境配置就完成了
 
 ### 烧写用户态
 
-  首先生成用户镜像,进入`downImg/rust/sdtest` 
+  dd烧写镜像：https://www.shangmayuan.com/a/054a78da4a6e4bc589bd4fad.html
   
-  执行`make down` 进入烧写过程 
+  我们的镜像是 user/build/raw.img
+
+
+### 执行程序
+
+  在 os目录下 执行make run-k210 
   
-  等待提示完毕即可
+  因为使用的是SD卡  所以程序执行的过程可能会慢一些
   
-  纯属娱乐 大家可以自己用dd命令
+
