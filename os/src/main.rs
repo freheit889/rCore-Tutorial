@@ -75,6 +75,7 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
     PROCESSOR.lock().add_thread(create_user_process("user_shell"));
 
     //PROCESSOR.lock().add_thread(create_user_process("write"));
+    
     extern "C" {
         fn __restore(context: usize);
     }
