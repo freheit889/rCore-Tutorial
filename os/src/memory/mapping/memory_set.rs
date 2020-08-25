@@ -132,7 +132,7 @@ impl MemorySet {
     }
  pub fn from_elf(file: &ElfFile, is_user: bool) -> MemoryResult<MemorySet> {
         // 建立带有内核映射的 MemorySet
-        let mut memory_set=MemorySet::new_kernel(16)?;
+        let mut memory_set=MemorySet::new_kernel(8)?;
 
         // 遍历 elf 文件的所有部分
         for program_header in file.program_iter() {

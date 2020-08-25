@@ -66,7 +66,6 @@ pub(super) fn sys_write(fd: usize, buffer: *mut u8, size: usize) -> SyscallResul
 }
 
 pub(super) fn sys_open(buffer:*mut u8,size:usize)->SyscallResult{
-        println!("node-1");
 	
 	//let fileName=unsafe{from_cstr(path)};
 	
@@ -75,15 +74,12 @@ pub(super) fn sys_open(buffer:*mut u8,size:usize)->SyscallResult{
             String::from_utf8_lossy(buffer)
         };
 
-        println!("node0 {}",fileName);
         //let file = FILE.lock().getByName(String::from(fileName));
 	let file=ROOT_INODE.find(&fileName).unwrap();
-	println!("node1");
 	let thread=PROCESSOR.lock().current_thread();
         thread.process.inner().descriptors.push(file);
 	
         let x:isize=(thread.process.inner().descriptors.len()-1) as isize;
-	println!("node2");
         SyscallResult::Proceed(x)
 }
 

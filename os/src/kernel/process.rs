@@ -17,7 +17,6 @@ pub(super) fn sys_exit(code: usize) -> SyscallResult {
 pub (super) fn sys_exec(path:*const u8,context:Context)->SyscallResult{
     
     let name=unsafe{from_cstr(path)};
-    println!("{}",name);
     let app = ROOT_INODE.find(name);
     match app{
         Ok(inode)=>{
