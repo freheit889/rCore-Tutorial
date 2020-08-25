@@ -47,4 +47,4 @@ rustup component add llvm-tools-preview
   
   因为使用的是SD卡  所以程序执行的过程可能会慢一些
   
-
+  如果不使用较大的内存 可以在/src/progress/config.rs中调节线程运行栈的大小   可以有效提高运行速度
