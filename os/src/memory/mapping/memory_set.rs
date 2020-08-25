@@ -26,7 +26,7 @@ pub struct MemorySet {
 
 impl MemorySet {
     /// 创建内核重映射
-    pub fn new_kernel() -> MemoryResult<MemorySet> {
+    pub fn new_kernel(quota:usize) -> MemoryResult<MemorySet> {
         // 在 linker.ld 里面标记的各个字段的起始点，均为 4K 对齐
         extern "C" {
             fn text_start();
@@ -36,12 +36,6 @@ impl MemorySet {
         }
         // 建立字段
         let segments = vec![
-            // .text 段，r-x
-	    Segment {
-                map_type: MapType::device,
-                range: Range::from(SWAP_START_ADDRESS..SWAP_END_ADDRESS),
-                flags: Flags::READABLE | Flags::WRITABLE,
-            },
 		
             Segment {
                 map_type: MapType::device,
@@ -83,7 +77,7 @@ impl MemorySet {
                 flags: Flags::READABLE | Flags::WRITABLE,
             },
         ];
-        let mut mapping = Mapping::new(KERNEL_PROCESS_FRAME_QUOTA)?;
+        let mut mapping = Mapping::new(quota)?;
         // 每个字段在页表中进行映射
         for segment in segments.iter() {
             mapping.map(segment, None)?;
@@ -138,7 +132,7 @@ impl MemorySet {
     }
  pub fn from_elf(file: &ElfFile, is_user: bool) -> MemoryResult<MemorySet> {
         // 建立带有内核映射的 MemorySet
-        let mut memory_set = MemorySet::new_kernel()?;
+        let mut memory_set=MemorySet::new_kernel(16)?;
 
         // 遍历 elf 文件的所有部分
         for program_header in file.program_iter() {
@@ -148,15 +142,14 @@ impl MemorySet {
             // 从每个字段读取「起始地址」「大小」和「数据」
             let start = VirtualAddress(program_header.virtual_addr() as usize);
             let size = program_header.mem_size() as usize;
-            let data: &[u8] =
+	    let data: &[u8] =
                 if let SegmentData::Undefined(data) = program_header.get_data(file).unwrap() {
                     data
                 } else {
                     return Err("unsupported elf format");
                 };
 
-            // 将每一部分作为 Segment 进行映射
-            let segment = Segment {
+	    let segment = Segment {
                 map_type: MapType::Framed,
                 range: Range::from(start..(start + size)),
                 flags: Flags::user(is_user)

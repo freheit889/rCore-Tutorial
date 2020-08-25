@@ -12,12 +12,14 @@ const FILE:&'static str="tmp";
 
 #[no_mangle]
 pub fn main()->usize{
+    
     let read_fd = open(FILE);
     let mut read = [0u8; BUFFER_SIZE];
     sys_read(read_fd as usize, &mut read);
+    
     println!("read data={}",String::from_utf8_lossy(&read));
 
-    //sys_close(read_fd as i32);
+    sys_close(read_fd as i32);
     0
 }
 

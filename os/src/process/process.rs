@@ -21,11 +21,11 @@ pub struct ProcessInner {
 #[allow(unused)]
 impl Process {
     /// 创建一个内核进程
-    pub fn new_kernel() -> MemoryResult<Arc<Self>> {
+    pub fn new_kernel(quota:usize) -> MemoryResult<Arc<Self>> {
         Ok(Arc::new(Self {
             is_user: false,
             inner: Mutex::new(ProcessInner {
-                memory_set: MemorySet::new_kernel()?,
+                memory_set: MemorySet::new_kernel(quota)?,
                 descriptors: vec![STDIN.clone(), STDOUT.clone()],
             }),
         }))

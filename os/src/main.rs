@@ -6,7 +6,7 @@
 #![feature(panic_info_message)]
 #![feature(alloc_error_handler)]
 #![feature(drain_filter)]
-
+#![feature(vec_remove_item)]
 global_asm!(include_str!("entry.asm"));
 
 extern crate alloc;
@@ -25,8 +25,10 @@ mod driver;
 
 use process::*;
 use alloc::sync::Arc;
-use crate::fs::{ROOT_INODE,INodeExt};
+use alloc::string::String;
+use crate::fs::{ROOT_INODE,INodeExt,FILE};
 use xmas_elf::ElfFile;
+
 #[no_mangle]
 pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
     interrupt::init();
@@ -53,12 +55,25 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
    //kernel thread test     
    /*{
         let mut processor=PROCESSOR.lock();
-        let kernel_process=Process::new_kernel().unwrap();
-        for i in 1..=1usize{
+        let kernel_process=Process::new_kernel(8).unwrap();
+        for i in 1..=2usize{
             let thread=create_kernel_thread(
                     kernel_process.clone(),
                     sample_process as usize,
                     Some(&[i])
+                    );
+           processor.add_thread(thread);
+        }
+    }*/
+
+   /*{
+        let mut processor=PROCESSOR.lock();
+        let kernel_process=Process::new_kernel(16).unwrap();
+        for i in 1..=1usize{
+            let thread=create_kernel_thread(
+                    kernel_process.clone(),
+                    test as usize,
+                    Some(&[])
                     );
            processor.add_thread(thread);
         }
@@ -128,6 +143,13 @@ fn kernel_thread_exit() {
     PROCESSOR.lock().current_thread().as_ref().inner().dead = true;
     // 制造一个中断来交给操作系统处理
     unsafe { llvm_asm!("ebreak" :::: "volatile") };
+}
+
+fn test(){
+    println!("begin");
+    let app = ROOT_INODE.find("hello_world").unwrap();
+    //let data = app.readall().unwrap();
+    //println!("{:?}",data);
 }
 
 fn test_page_fault() {

@@ -8,6 +8,7 @@ extern crate user_lib;
 
 const LF:u8=0x0au8;
 const CR:u8=0x0du8;
+const DL: u8 = 0x7fu8;
 
 use alloc::string::String;
 use user_lib::syscall::sys_exec;
@@ -15,7 +16,6 @@ use user_lib::console::getchar;
 
 #[no_mangle]
 pub fn main(){
-    println!("");
     println!("Rust user shell");
     let mut line:String=String::new();
     

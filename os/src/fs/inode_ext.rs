@@ -1,7 +1,6 @@
 //! 为 [`INode`] 实现 trait [`INodeExt`] 以扩展功能
 
 use super::*;
-
 /// 为 [`INode`] 类型添加的扩展功能
 pub trait INodeExt {
     /// 打印当前目录的文件
@@ -15,7 +14,11 @@ impl INodeExt for dyn INode {
     fn ls(&self) {
         let mut id = 0;
         while let Ok(name) = self.get_entry(id) {
-            println!("{}", name);
+            let app = ROOT_INODE.find(&name).unwrap();
+	    if(id>1){
+	    	//FILE.lock().push(name.clone(),app);
+	    }
+	    println!("{}", name);
             id += 1;
         }
     }

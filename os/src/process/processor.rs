@@ -13,7 +13,7 @@ lazy_static! {
 lazy_static! {
     /// 空闲线程：当所有线程进入休眠时，切换到这个线程——它什么都不做，只会等待下一次中断
     static ref IDLE_THREAD: Arc<Thread> = Thread::new(
-        Process::new_kernel().unwrap(),
+        Process::new_kernel(KERNEL_PROCESS_FRAME_QUOTA).unwrap(),
         wait_for_interrupt as usize,
         None,
     ).unwrap();
