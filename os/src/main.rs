@@ -44,7 +44,9 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
     println!("_kernel_end = {:#x}", (kernel_end as usize) / 4096);
      
      
-    //swap test
+    //swap test alloc 2M  
+    //you can close the pageFault remind in /src/interrupt/handler.rs  fn page_fault
+
     /*PROCESSOR.lock().add_thread(create_kernel_thread(
         Process::new_kernel().unwrap(),
         test_page_fault as usize,
