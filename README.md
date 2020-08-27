@@ -38,7 +38,9 @@ rustup component add llvm-tools-preview
 
 ### 烧写用户态
 
-  dd烧写镜像：https://www.shangmayuan.com/a/054a78da4a6e4bc589bd4fad.html
+  在user目录下 执行make down 等待烧写完毕
+   
+  确认你的SD卡设备是Makefile里对应的设备
   
   我们的镜像是 user/build/raw.img
 
