@@ -43,17 +43,6 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
     println!("kernel_end = {:#x}", kernel_end as usize);
     println!("_kernel_end = {:#x}", (kernel_end as usize) / 4096);
      
-     
-    //swap test alloc 2M  
-    //you can close the pageFault remind in /src/interrupt/handler.rs  fn page_fault
-
-    /*PROCESSOR.lock().add_thread(create_kernel_thread(
-        Process::new_kernel().unwrap(),
-        test_page_fault as usize,
-        None,
-    ));*/
-     
-
    //kernel thread test     
    /*{
         let mut processor=PROCESSOR.lock();
@@ -89,10 +78,14 @@ pub extern "C" fn rust_main(hartid: usize, sp: usize) -> ! {
 
     //PROCESSOR.lock().add_thread(create_user_process("hello_world"));
     
-    PROCESSOR.lock().add_thread(create_user_process("user_shell"));
+    //PROCESSOR.lock().add_thread(create_user_process("user_shell"));
 
     //PROCESSOR.lock().add_thread(create_user_process("write"));
     
+    //PROCESSOR.lock().add_thread(create_user_process("testSwap"));    
+    
+    //PROCESSOR.lock().add_thread(create_user_process("fantastic_text"));    
+    PROCESSOR.lock().add_thread(create_user_process("snake")); 
     extern "C" {
         fn __restore(context: usize);
     }
@@ -147,20 +140,3 @@ fn kernel_thread_exit() {
     unsafe { llvm_asm!("ebreak" :::: "volatile") };
 }
 
-fn test(){
-    println!("begin");
-    let app = ROOT_INODE.find("hello_world").unwrap();
-    //let data = app.readall().unwrap();
-    //println!("{:?}",data);
-}
-
-fn test_page_fault() {
-    let mut array = [0usize; 256 * 1024];
-    for i in 0..array.len() {
-        array[i] = i;
-    }
-    for i in 0..array.len() {
-        assert_eq!(i, array[i]);
-    }
-    println!("\x1b[32mtest passed\x1b[0m");
-}

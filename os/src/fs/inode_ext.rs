@@ -14,10 +14,6 @@ impl INodeExt for dyn INode {
     fn ls(&self) {
         let mut id = 0;
         while let Ok(name) = self.get_entry(id) {
-            let app = ROOT_INODE.find(&name).unwrap();
-	    if(id>1){
-	    	//FILE.lock().push(name.clone(),app);
-	    }
 	    println!("{}", name);
             id += 1;
         }
@@ -30,7 +26,6 @@ impl INodeExt for dyn INode {
         let mut buffer:Vec<u8>=Vec::with_capacity(size);
 
         unsafe { buffer.set_len(size) };
-
 
         self.read_at(0, buffer.as_mut_slice())?;
         Ok(buffer)

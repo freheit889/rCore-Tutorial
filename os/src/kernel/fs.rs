@@ -15,19 +15,21 @@ pub(super) fn sys_read(fd: usize, buffer: *mut u8, size: usize) -> SyscallResult
     
 
     if(fd==0){
-        loop{
-            let c=crate::console::getchar_option();
-            match c{
-                Some(inode)=>{
-                    let buffer = unsafe { from_raw_parts_mut(buffer, 1) };
-                    buffer[0]=inode as u8;
-                    return SyscallResult::Proceed(1);
-                }
-                None=>{
-                    continue;
-                }
-            }
-        }
+          for i in 0..100000{	
+		let c=crate::console::getchar_option();
+          	let buffer = unsafe { from_raw_parts_mut(buffer, 1) };
+		match c{
+              		Some(inode)=>{
+                 		buffer[0]=inode as u8;
+				return SyscallResult::Proceed(1);
+              		}
+              		None=>{
+                  		buffer[0]=0;
+              		}
+          
+	 	}
+	}
+	return SyscallResult::Proceed(1);
     }
     if let Some(inode) = process.inner().descriptors.get(fd) {
         // 从系统调用传入的参数生成缓冲区

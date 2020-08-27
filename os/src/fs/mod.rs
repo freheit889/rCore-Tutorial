@@ -32,7 +32,6 @@ lazy_static! {
             )
         };
         let sfs = SimpleFileSystem::open(device).expect("failed to open SFS");
-        println!("open");
         sfs.root_inode()
     };
 }
@@ -40,6 +39,5 @@ lazy_static! {
 /// 触发 [`static@ROOT_INODE`] 的初始化并打印根目录内容
 pub fn init() {
     ROOT_INODE.ls();
-//    println!("getlen{}",FILE.lock().name.len());
     println!("mod fs initialized");
 }

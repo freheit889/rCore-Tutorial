@@ -78,10 +78,10 @@ fn fault(msg:&str, scause: Scause, stval: usize)->*mut Context {
 
 fn page_fault(context: &mut Context, scause: Scause, stval: usize) -> *mut Context {
     static mut COUNT: usize = 0;
-    println!("page_fault {}", unsafe {
+    /*println!("page_fault {}", unsafe {
         COUNT += 1;
         COUNT
-    });
+    });*/
     let current_thread = PROCESSOR.lock().current_thread();
     let memory_set = &mut current_thread.process.inner().memory_set;
     

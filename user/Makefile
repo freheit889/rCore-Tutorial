@@ -32,7 +32,7 @@ build: dependency
 	@mkdir -p $(OUT_DIR)
 	@cp $(BIN_FILES) $(OUT_DIR)
 	@cp $(file) $(OUT_DIR)
-	@dd if=/dev/zero of=$(OUT_DIR)/SWAP_FILE bs=1M count=100
+	@dd if=/dev/zero of=$(OUT_DIR)/SWAP_FILE bs=1M count=20
 	@rcore-fs-fuse --fs sfs $(IMG_FILE) $(OUT_DIR) zip
 	@qemu-img convert -f raw $(IMG_FILE) -O qcow2 $(QCOW_FILE)
 	@qemu-img resize $(QCOW_FILE) +1G
@@ -42,3 +42,7 @@ asm:
 clean:
 	@cargo clean
 	@rm -rf $(OUT_DIR) $(IMG_FILE) $(QCOW_FILE)
+
+down:
+	@sudo dd if=/dev/zero of=/dev/sdb bs=1M count=50
+	@sudo dd if=build/raw.img of=/dev/sdb

@@ -1,7 +1,7 @@
 //! 定义一些进程相关的常量
 
-/// 每个线程的运行栈大小 4M
-pub const STACK_SIZE: usize = 0x40_0000;
+/// 每个线程的运行栈大小 512k
+pub const STACK_SIZE: usize = 0x4_0000;
 
 /// 共用的内核栈大小 512 KB
 pub const KERNEL_STACK_SIZE: usize = 0x8_0000;

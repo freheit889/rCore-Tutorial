@@ -34,6 +34,7 @@ pub fn main(){
                 }
             print!(">> ")
             }
+	    0=>{}
             _=>{
                 print!("{}",c as char);
                 line.push(c as char);
