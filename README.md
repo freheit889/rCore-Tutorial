@@ -1,12 +1,14 @@
 # rCore-Tutorial
-rCore移植k210
+rCore移植k210  
+
+为了让贪吃蛇不卡死  我将原先的阻塞读取字符改成了一次读很多次字符 可能需要多输几次才能改变方向
 
 ## 目前已实现
 * 在opensbi上运行lab1-6
 * 在rustsbi上运行lab1-6
 * 在sd卡上读写用户态
 * 虚拟存储
-
+* 贪吃蛇游戏demo
 ### 已支持的系统调用
 * sys_open
 * sys_exec
